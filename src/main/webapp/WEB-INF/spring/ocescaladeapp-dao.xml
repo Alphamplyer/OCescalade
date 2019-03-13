@@ -7,7 +7,7 @@
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>classpath:/com/alphamplyer/ocescalade/dao/config/db.properties</value>
+                <value>classpath:/db.properties</value>
             </list>
         </property>
     </bean>
