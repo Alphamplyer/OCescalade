@@ -1,5 +1,6 @@
 .idea/
 .sass-cache/
+sass/
 target/
 .war
 pom.xml.tag

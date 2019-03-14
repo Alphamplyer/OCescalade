@@ -1,10 +1,10 @@
-package com.alphamplyer.ocescalade.dao.interf;
+package com.alphamplyer.ocescalade.service.interf;
 
 import com.alphamplyer.ocescalade.model.Topo;
 
 import java.util.List;
 
-public interface TopoDAO {
+public interface TopoService {
 
     Topo getTopo(Integer id);
 

@@ -1,0 +1,6 @@
+# Command to change css in deployed mode
+sass --watch sass/style.scss:"C:/Program Files/Tomcat/apache-tomcat-9.0.14/webapps/OCEscalade_war/resources/css/style.css"
+
+# Command to change css in edit mode
+sass --watch sass/style.scss:src/main/webapp/resources/css/style.css
+

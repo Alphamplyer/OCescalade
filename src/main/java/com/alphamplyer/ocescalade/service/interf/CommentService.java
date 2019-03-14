@@ -1,10 +1,10 @@
-package com.alphamplyer.ocescalade.dao.interf;
+package com.alphamplyer.ocescalade.service.interf;
 
 import com.alphamplyer.ocescalade.model.Comment;
 
 import java.util.List;
 
-public interface CommentDAO {
+public interface CommentService {
 
     public List<Comment> getAllComment();
 

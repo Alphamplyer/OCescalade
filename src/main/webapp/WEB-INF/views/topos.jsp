@@ -1,5 +1,3 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
 <html lang="fr">
 
 <head>
@@ -26,11 +24,11 @@
 <section class="section">
     <div class="l-container">
         <h2 class="section-title">Rechercher</h2>
-        <div class="section-searchbar">
-            <form action="topos" class="searchbar">
-                <textfield name="searchQuery" class="searchbar-txt"  placeholder="Search.." />
-                <submit class="searchbar-bnt" value="Rechercher" />
-            </form>
+        <div class="section-searchbar searchbar">
+            <input class="searchbar-txt" type="text" placeholder="Search..">
+            <a class="searchbar-bnt" href="">
+                <i class="fas fa-search"></i>
+            </a>
         </div>
 
         <div class="articles topo-articles">

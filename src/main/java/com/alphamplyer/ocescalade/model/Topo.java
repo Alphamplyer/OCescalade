@@ -1,25 +1,44 @@
 package com.alphamplyer.ocescalade.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.sql.Timestamp;
 
+@Entity
+@Table(name = "Topo")
 public class Topo {
 
     // ================== Attributes =================== //
 
+    @Id
+    @Column(name = "id")
     private Integer id;
+    @Column(name = "author_id")
     private Integer author_id;
 
+    @Column(name = "topo_title")
     private String topo_title;
+    @Column(name = "topo_description")
     private String topo_description;
+    @Column(name = "topo_content")
     private String topo_content;
 
+    @Column(name = "creation_date")
     private Timestamp creation_date;
+    @Column(name = "topo_like")
     private Integer topo_like;
+    @Column(name = "topo_vues")
     private Integer topo_vues;
 
+    @Column(name = "is_bookable")
     private Boolean is_bookable;
+    @Column(name = "begin_date")
     private Timestamp begin_date;
+    @Column(name = "end_date")
     private Timestamp end_date;
+    @Column(name = "organizer_id")
     private Integer organizer_id;
 
     // ================= Constructors ================== //

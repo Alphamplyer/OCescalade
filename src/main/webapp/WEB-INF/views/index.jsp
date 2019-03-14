@@ -1,6 +1,3 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<!DOCTYPE html>
 <html lang="fr">
 
 <head>
@@ -29,20 +26,20 @@
     <div class="l-container">
         <div class="articles">
             <h2 class="section-title">Nouveautés</h2>
-            <s:iterator value="topoList">
+            <c:forEach items="${listTopo}" var="listTopo">
                 <article class="article">
                     <div class="article-image"></div>
                     <div class="article-content">
-                        <h3 class="article-content-title"><a href=""><s:property value="topo_title" /></a></h3>
-                        <p class="article-content-description"><s:property value="topo_description" /></p>
+                        <h3 class="article-content-title"><a href=""><c:out value="${listTopo.topo_title}" /></a></h3>
+                        <p class="article-content-description"><c:out value="${listTopo.topo_description}" /></p>
                         <div class="article-content-like">
-                            <span><s:property value="topo_like" /></span><i class="far fa-eye"></i>
-                            <span><s:property value="topo_vues" /></span><i class="far fa-heart"></i>
+                            <span><c:out value="${listTopo.topo_like}" /></span><i class="far fa-eye"></i>
+                            <span><c:out value="${listTopo.topo_vues}" /></span><i class="far fa-heart"></i>
                         </div>
                     </div>
                     <a href="" class="article-learn-more"><span>></span></a>
                 </article>
-            </s:iterator>
+            </c:forEach>
         </div>
 
         <div class="index-asides">

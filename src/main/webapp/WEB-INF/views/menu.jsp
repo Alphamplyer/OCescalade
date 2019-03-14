@@ -1,9 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<a href="index.jsp" class="header-logo">OCEscalade</a>
+<a href="index" class="header-logo">OCEscalade</a>
 <nav class="menu">
-    <a class="menu-item" href="topos.jsp">Topos</a>
-    <span>//</span><a class="menu-item" href="topo.jsp">Topos réservable</a>
-    <span>//</span><a class="menu-item" href="about.jsp">A Propos</a>
-    <span>//</span><a class="menu-item" href="login.jsp">Connexion</a>
+    <a class="menu-item" href="topos">Topos</a>
+    <span>//</span><a class="menu-item" href="topo">Topos réservable</a>
+    <span>//</span><a class="menu-item" href="about">A Propos</a>
+    <span>//</span><a class="menu-item" href="login">Connexion</a>
 </nav>
