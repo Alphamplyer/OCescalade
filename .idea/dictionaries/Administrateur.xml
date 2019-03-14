@@ -2,9 +2,11 @@
   <dictionary name="Administrateur">
     <words>
       <w>alphamplyer</w>
+      <w>escalade</w>
       <w>ocescalade</w>
       <w>postgresql</w>
       <w>topo</w>
+      <w>topos</w>
     </words>
   </dictionary>
 </component>

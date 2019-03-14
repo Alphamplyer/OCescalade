@@ -2,9 +2,10 @@
 
 <html>
 <head>
-    <title>Title</title>
+    <%@ include file="header.jsp" %>
+    <title>About</title>
 </head>
 <body>
-    <p>Hello Word</p>
+
 </body>
 </html>

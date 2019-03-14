@@ -5,35 +5,10 @@
 
     <display-name>OC Escalade</display-name>
 
-    <!--
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>
-            /WEB-INF/spring/ocescaladeapp-dao.xml
-            /WEB-INF/spring/ocescaladeapp-service.xml
-            /WEB-INF/spring/ocescaladeapp-servlet.xml
-        </param-value>
-    </context-param>-->
-
-
-    <!-- Configure DispatcherServlet -->
-    <!--
-    <servlet>
-        <servlet-name>ocescaladeapp</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <init-param>
-            <param-name>contextConfigLocation</param-name>
-            <param-value>/WEB-INF/spring/ocescaladeapp-servlet.xml</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>ocescaladeapp</servlet-name>
-        <url-pattern>*.htm</url-pattern>
-    </servlet-mapping>-->
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <include-prelude>/WEB-INF/taglibs.jsp</include-prelude>
+        </jsp-property-group>
+    </jsp-config>
 </web-app>

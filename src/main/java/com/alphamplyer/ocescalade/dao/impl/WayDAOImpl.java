@@ -1,4 +1,4 @@
 package com.alphamplyer.ocescalade.dao.impl;
 
-public interface WayDAOImpl {
+public class WayDAOImpl {
 }
