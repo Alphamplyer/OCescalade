@@ -7,9 +7,11 @@ import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class CommentDAOImpl implements CommentDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(CommentDAOImpl.class);
@@ -31,8 +33,7 @@ public class CommentDAOImpl implements CommentDAO {
     @Override
     public List<Comment> getNumberComment(Integer number, Integer offset) {
         //noinspection JpaQlInspection
-        String sql = "SELECT c FROM Comment c " +
-            "ORDER BY creation_date DESC";
+        String sql = "FROM Comment AS Comment INNER JOIN Comment.topo_title AS Topo ORDER BY Comment.creation_date DESC";
 
 
         Session session = this.sessionFactory.getCurrentSession();
@@ -52,6 +53,4 @@ public class CommentDAOImpl implements CommentDAO {
 
         return comments;
     }
-
-
 }

@@ -45,19 +45,19 @@
         <div class="index-asides">
             <div class="index-asides-container">
                 <p class="index-asides-container-title">Derniers commentaires</p>
-                <s:iterator value="commentList">
+                <c:forEach items="${listComment}" var="listComment">
                     <hr class="index-asides-separator">
                     <aside class="index-aside">
                         <div class="index-aside-content">
-                            <a class="index-aside-content-title" href=""><s:property value="topo_title" /></a>
-                            <p class="index-aside-content-context">laissé par <a href=""><s:property value="nickname"/></a> le <s:property value="creation_date" /></p>
+                            <a class="index-aside-content-title" href=""><c:out value="topo_title" /></a>
+                            <p class="index-aside-content-context">laissé par <a href=""><c:out value="author.nickname"/></a> le <c:out value="creation_date" /></p>
                             <p class="index-aside-content-description">
-                                <s:property value="comment_content" />
+                                <c:out value="comment_content" />
                             </p>
                         </div>
                         <a href="" class="index-aside-learn-more">Read-more</a>
                     </aside>
-                </s:iterator>
+                </c:forEach>
             </div>
         </div>
     </div>

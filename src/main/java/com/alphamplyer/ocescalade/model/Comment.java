@@ -22,6 +22,8 @@ public class Comment {
     @Column(name = "author_id")
     private Integer author_id;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user", referencedColumnName = "id", nullable = false)
     private User author;
 
     @Column(name = "comment_content")
@@ -34,7 +36,9 @@ public class Comment {
     @Column(name = "parent_id")
     private Integer parent_id;
 
-    private List<Comment> reply_comment;
+    @OneToMany
+    @JoinColumn(name = "comment", referencedColumnName = "parent_id", nullable = true)
+    private List<Comment> reply_comments;
 
     @Column(name = "edited")
     private Boolean edited;
@@ -47,14 +51,16 @@ public class Comment {
         this.id = id;
     }
 
-    public Comment(Integer id, Integer topo_id, Integer author_id, String comment_content, Timestamp creation_date, Boolean reply, Integer parent_id, Boolean edited) {
+    public Comment(Integer id, Integer topo_id, Integer author_id, User author, String comment_content, Timestamp creation_date, Boolean reply, Integer parent_id, List<Comment> reply_comments, Boolean edited) {
         this.id = id;
         this.topo_id = topo_id;
         this.author_id = author_id;
+        this.author = author;
         this.comment_content = comment_content;
         this.creation_date = creation_date;
         this.reply = reply;
         this.parent_id = parent_id;
+        this.reply_comments = reply_comments;
         this.edited = edited;
     }
 
@@ -91,7 +97,7 @@ public class Comment {
     }
 
     public List<Comment> getReply_comment() {
-        return reply_comment;
+        return reply_comments;
     }
 
     public Boolean getEdited() {
@@ -136,8 +142,8 @@ public class Comment {
         this.parent_id = parent_id;
     }
 
-    public void setReply_comment(List<Comment> reply_comment) {
-        this.reply_comment = reply_comment;
+    public void setReply_comment(List<Comment> reply_comments) {
+        this.reply_comments = reply_comments;
     }
 
     public void setEdited(Boolean edited) {
