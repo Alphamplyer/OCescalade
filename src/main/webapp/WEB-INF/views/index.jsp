@@ -49,10 +49,10 @@
                     <hr class="index-asides-separator">
                     <aside class="index-aside">
                         <div class="index-aside-content">
-                            <a class="index-aside-content-title" href=""><c:out value="topo_title" /></a>
-                            <p class="index-aside-content-context">laissé par <a href=""><c:out value="author.nickname"/></a> le <c:out value="creation_date" /></p>
+                            <a class="index-aside-content-title" href=""><c:out value="${topo_title}" /></a>
+                            <p class="index-aside-content-context">laissé par <a href=""><c:out value="${author.nickname}"/></a> le <c:out value="${creation_date}" /></p>
                             <p class="index-aside-content-description">
-                                <c:out value="comment_content" />
+                                <c:out value="${comment_content}" />
                             </p>
                         </div>
                         <a href="" class="index-aside-learn-more">Read-more</a>

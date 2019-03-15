@@ -32,12 +32,11 @@ public class CommentDAOImpl implements CommentDAO {
     @SuppressWarnings("unchecked")
     @Override
     public List<Comment> getNumberComment(Integer number, Integer offset) {
-        //noinspection JpaQlInspection
-        String sql = "FROM Comment AS Comment INNER JOIN Comment.topo_title AS Topo ORDER BY Comment.creation_date DESC";
+        //language=hql
+        String sql = "FROM Comment c INNER JOIN topo_title ORDER BY c.creation_date DESC";
 
 
         Session session = this.sessionFactory.getCurrentSession();
-
         List<Comment> comments;
 
         if (number > 0 && offset > 0) {
