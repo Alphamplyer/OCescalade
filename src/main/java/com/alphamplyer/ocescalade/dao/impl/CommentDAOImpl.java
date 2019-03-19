@@ -1,26 +1,28 @@
 package com.alphamplyer.ocescalade.dao.impl;
 
+import com.alphamplyer.ocescalade.dao.AbstractDAO;
 import com.alphamplyer.ocescalade.dao.interf.CommentDAO;
+import com.alphamplyer.ocescalade.dao.mapper.CommentMapper;
 import com.alphamplyer.ocescalade.model.Comment;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import java.util.List;
 
 @Repository
-public class CommentDAOImpl implements CommentDAO {
+public class CommentDAOImpl extends AbstractDAO implements CommentDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(CommentDAOImpl.class);
 
     @Autowired
-    private SessionFactory sessionFactory;
-
-    public void setSessionFactory(SessionFactory sessionFactory){
-        this.sessionFactory = sessionFactory;
+    public CommentDAOImpl(DataSource dataSource) {
+        setDataSource(dataSource);
     }
 
 
@@ -32,23 +34,44 @@ public class CommentDAOImpl implements CommentDAO {
     @SuppressWarnings("unchecked")
     @Override
     public List<Comment> getNumberComment(Integer number, Integer offset) {
-        //language=hql
-        String sql = "FROM Comment c INNER JOIN topo_title ORDER BY c.creation_date DESC";
+        StringBuilder sql = new StringBuilder("SELECT c.id, c.topo_id, c.user_id, c.comment_content, c.creation_date, c.reply, c.parent_id, c.edited,")
+            .append(" t.topo_title,")
+            .append(" u.id, u.first_name, u.second_name, u.nickname, u.password, u.inscription_date, u.mail, u.permission_level FROM comment c")
+            .append(" INNER JOIN topo t ON c.topo_id = t.id")
+            .append(" INNER JOIN users u ON c.user_id = u.id")
+            .append(" ORDER BY c.creation_date DESC");
+        StringBuilder log = new StringBuilder(" Comment(s) loaded successfully !");
 
+        if (number > 0) {
+            sql.append(" LIMIT :limitation");
+            log.append(" with the parameters = {\n    Limitation = ").append(number);
 
-        Session session = this.sessionFactory.getCurrentSession();
+            if (offset > 0) {
+                sql.append(" OFFSET :offset");
+                log.append("\n    Offset = ").append(offset);
+            }
+
+            log.append("\n}");
+        }
+
+        NamedParameterJdbcTemplate jdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        RowMapper<Comment> rowMapper = new CommentMapper();
         List<Comment> comments;
 
-        if (number > 0 && offset > 0) {
-            comments = session.createQuery(sql).setMaxResults(number).setFirstResult(offset).list();
-            logger.info(comments.size() + " Comment(s) successfully loaded !\\nParameters = {\n    Limitation = " + number + "\n    Offset = " + offset + "\n}");
-        } else if (number > 0) {
-            comments = session.createQuery(sql).setMaxResults(number).list();
-            logger.info(comments.size() + " Comment(s) successfully loaded !\\nParameters = {\n    Limitation = " + number +"\n}");
-        } else {
-            comments = session.createQuery(sql).list();
-            logger.info(comments.size() + " Comment(s) successfully loaded !");
+        if (number > 0) {
+            params.addValue("limitation", number);
+
+            if (offset > 0) {
+                params.addValue("offset", offset);
+            }
         }
+
+        comments = jdbcTemplate.query(sql.toString(), params, rowMapper);
+
+        log.insert(0, comments.size());
+
+        logger.info(log.toString());
 
         return comments;
     }

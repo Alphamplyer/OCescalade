@@ -51,6 +51,12 @@ public class TopoServiceImpl implements TopoService {
 
     @Override
     @Transactional
+    public Integer countSimpleTopo() {
+        return this.topoDAO.countSimpleTopo();
+    }
+
+    @Override
+    @Transactional
     public List<Topo> listBookableTopo() {
         return this.topoDAO.listBookableTopo();
     }

@@ -1,46 +1,26 @@
 package com.alphamplyer.ocescalade.model;
 
-import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
 
-@Entity
-@Table(name = "Comment")
 public class Comment {
 
     // ================== Attributes =================== //
 
-    @Id
-    @Column(name = "id")
     private Integer id;
 
-    @Column(name = "topo_id")
     private Integer topo_id;
-    @JoinColumn(name = "topo_title")
     private String topo_title;
 
-    @Column(name = "author_id")
-    private Integer author_id;
+    private User user;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user", referencedColumnName = "id", nullable = false)
-    private User author;
-
-    @Column(name = "comment_content")
     private String comment_content;
-    @Column(name = "creation_date")
     private Timestamp creation_date;
 
-    @Column(name = "reply")
     private Boolean reply;
-    @Column(name = "parent_id")
     private Integer parent_id;
-
-    @OneToMany
-    @JoinColumn(name = "comment", referencedColumnName = "parent_id", nullable = true)
     private List<Comment> reply_comments;
 
-    @Column(name = "edited")
     private Boolean edited;
 
     // ================= Constructors ================== //
@@ -51,11 +31,11 @@ public class Comment {
         this.id = id;
     }
 
-    public Comment(Integer id, Integer topo_id, Integer author_id, User author, String comment_content, Timestamp creation_date, Boolean reply, Integer parent_id, List<Comment> reply_comments, Boolean edited) {
+    public Comment(Integer id, Integer topo_id, String topo_title, User user, String comment_content, Timestamp creation_date, Boolean reply, Integer parent_id, List<Comment> reply_comments, Boolean edited) {
         this.id = id;
         this.topo_id = topo_id;
-        this.author_id = author_id;
-        this.author = author;
+        this.topo_title = topo_title;
+        this.user = user;
         this.comment_content = comment_content;
         this.creation_date = creation_date;
         this.reply = reply;
@@ -76,8 +56,12 @@ public class Comment {
         return topo_id;
     }
 
-    public Integer getAuthor_id() {
-        return author_id;
+    public String getTopo_title() {
+        return topo_title;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public String getComment_content() {
@@ -96,20 +80,12 @@ public class Comment {
         return parent_id;
     }
 
-    public List<Comment> getReply_comment() {
+    public List<Comment> getReply_comments() {
         return reply_comments;
     }
 
     public Boolean getEdited() {
         return edited;
-    }
-
-    public String getTopo_title() {
-        return topo_title;
-    }
-
-    public User getAuthor() {
-        return author;
     }
 
     // SET ////////////////////////////////////////////////
@@ -122,8 +98,12 @@ public class Comment {
         this.topo_id = topo_id;
     }
 
-    public void setAuthor_id(Integer author_id) {
-        this.author_id = author_id;
+    public void setTopo_title(String topo_title) {
+        this.topo_title = topo_title;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void setComment_content(String comment_content) {
@@ -142,20 +122,12 @@ public class Comment {
         this.parent_id = parent_id;
     }
 
-    public void setReply_comment(List<Comment> reply_comments) {
+    public void setReply_comments(List<Comment> reply_comments) {
         this.reply_comments = reply_comments;
     }
 
     public void setEdited(Boolean edited) {
         this.edited = edited;
-    }
-
-    public void setTopo_title(String topo_title) {
-        this.topo_title = topo_title;
-    }
-
-    public void setAuthor(User author) {
-        this.author = author;
     }
 
     // ==================== Methods ==================== //
@@ -168,8 +140,7 @@ public class Comment {
             .append(vSEP).append("  ID = ").append(id)
             .append(vSEP).append("  Topo ID").append(topo_id)
             .append(vSEP).append("  Topo Name = \"").append(topo_title).append('"')
-            .append(vSEP).append("  Author ID = \"").append(author_id).append('"')
-            .append(vSEP).append("  Topo Name = \"").append(topo_title).append('"')
+            .append(vSEP).append("  Author ID = \"").append(user.getId()).append('"')
             .append(vSEP).append("  Content = \"").append(comment_content).append('"')
             .append(vSEP).append("  Creation Date = \"").append(creation_date).append('"')
             .append(vSEP).append("  Is a reply = \"").append(reply).append('"')

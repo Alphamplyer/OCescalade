@@ -1,38 +1,25 @@
 package com.alphamplyer.ocescalade.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.sql.Date;
 
-@Entity
-@Table(name = "User")
 public class User {
 
     // ==================== Attributes ==================== //
-    @Id
-    @Column(name = "id")
+
     private Integer id;
-    @Column(name = "first_name")
-    private String firstName;
-    @Column(name = "second_name")
-    private String secondName;
-    @Column(name = "nickname")
+
+    private String first_name;
+    private String second_name;
     private String nickname;
-    @Column(name = "user_password")
-    private String password;
-    @Column(name = "birthday")
-    private Date birthday;
-    @Column(name = "inscription_date")
-    private Date inscriptionDate;
-    @Column(name = "mail")
+
     private String mail;
-    /**
-     * User permission Level; 0 = default rigth; 1 = no right; 2 = administrator; 3 = superAdministrator
-     */
-    @Column(name = "permission_level")
-    private Integer permissionLevel;
+    private String password;
+
+    private Date birthday;
+    private Date inscription_date;
+
+    private Integer permission_level;
+
 
     // ==================== Constructors ==================== //
     /**
@@ -51,22 +38,23 @@ public class User {
     /**
      * Constructor
      * @param id -
-     * @param firstName -
-     * @param secondName -
+     * @param first_name -
+     * @param second_name -
      * @param nickname -
      * @param password -
+     * @param inscription_date -
      * @param mail -
-     * @param permissionLevel -
+     * @param permission_level -
      */
-    public User(Integer id, String firstName, String secondName, String nickname, String password, Date inscriptionDate, String mail, Integer permissionLevel) {
+    public User(Integer id, String first_name, String second_name, String nickname, String password, Date inscription_date, String mail, Integer permission_level) {
         this.id = id;
-        this.firstName = firstName;
-        this.secondName = secondName;
+        this.first_name = first_name;
+        this.second_name = second_name;
         this.nickname = nickname;
         this.password = password;
-        this.inscriptionDate = inscriptionDate;
+        this.inscription_date = inscription_date;
         this.mail = mail;
-        this.permissionLevel = permissionLevel;
+        this.permission_level = permission_level;
     }
 
 
@@ -92,32 +80,32 @@ public class User {
      * Get User first name
      * @return User first name
      */
-    public String getFirstName() {
-        return firstName;
+    public String getFirst_name() {
+        return first_name;
     }
 
     /**
      * Set User first name
-     * @param firstName New User first name
+     * @param first_name New User first name
      */
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
     }
 
     /**
      * Get User second name
      * @return User second name
      */
-    public String getSecondName() {
-        return secondName;
+    public String getSecond_name() {
+        return second_name;
     }
 
     /**
      * Set User second name
-     * @param secondName New User second name
+     * @param second_name New User second name
      */
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
+    public void setSecond_name(String second_name) {
+        this.second_name = second_name;
     }
 
     /**
@@ -172,16 +160,16 @@ public class User {
      * Get User inscription date
      * @return User inscription date
      */
-    public Date getInscriptionDate() {
-        return inscriptionDate;
+    public Date getInscription_date() {
+        return inscription_date;
     }
 
     /**
      * Set User inscription date
-     * @param inscriptionDate New User inscription date
+     * @param inscription_date New User inscription date
      */
-    public void setInscriptionDate(Date inscriptionDate) {
-        this.inscriptionDate = inscriptionDate;
+    public void setInscription_date(Date inscription_date) {
+        this.inscription_date = inscription_date;
     }
 
     /**
@@ -204,16 +192,16 @@ public class User {
      * Get User permission level
      * @return User permission level
      */
-    public Integer getPermissionLevel() {
-        return permissionLevel;
+    public Integer getPermission_level() {
+        return permission_level;
     }
 
     /**
      * Set User permission level
-     * @param permissionLevel New User permission level
+     * @param permission_level New User permission level
      */
-    public void setPermissionLevel(Integer permissionLevel) {
-        this.permissionLevel = permissionLevel;
+    public void setPermission_level(Integer permission_level) {
+        this.permission_level = permission_level;
     }
 
 
@@ -224,14 +212,14 @@ public class User {
         final String vSEP = "\n";
         vStB.append(" {\n")
             .append("         User ID =").append(id)
-            .append(vSEP).append("      first name = \"").append(firstName).append('"')
-            .append(vSEP).append("     second name = \"").append(secondName).append('"')
+            .append(vSEP).append("      first name = \"").append(first_name).append('"')
+            .append(vSEP).append("     second name = \"").append(second_name).append('"')
             .append(vSEP).append("        nickname = \"").append(nickname).append('"')
             .append(vSEP).append("        password = \"").append(password).append('"')
             .append(vSEP).append("        Birthday = \"").append(birthday).append('"')
-            .append(vSEP).append("Inscription Date = \"").append(inscriptionDate).append('"')
+            .append(vSEP).append("Inscription Date = \"").append(inscription_date).append('"')
             .append(vSEP).append("   mail (e-mail) = \"").append(mail).append('"')
-            .append(vSEP).append("permission level = \"").append(permissionLevel).append('"')
+            .append(vSEP).append("permission level = \"").append(permission_level).append('"')
             .append("\n}");
         return vStB.toString();
     }

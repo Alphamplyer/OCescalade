@@ -16,6 +16,8 @@ public interface TopoDAO {
 
     List<Topo> listNumberSimpleTopo(Integer number, Integer offset);
 
+    Integer countSimpleTopo();
+
     List<Topo> listBookableTopo();
 
     List<Topo> listNumberBookableTopo(Integer number, Integer offset);

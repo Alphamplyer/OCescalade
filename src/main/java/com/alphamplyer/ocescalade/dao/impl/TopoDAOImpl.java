@@ -1,33 +1,42 @@
 package com.alphamplyer.ocescalade.dao.impl;
 
+import com.alphamplyer.ocescalade.dao.AbstractDAO;
 import com.alphamplyer.ocescalade.dao.interf.TopoDAO;
+import com.alphamplyer.ocescalade.dao.mapper.TopoMapper;
 import com.alphamplyer.ocescalade.model.Topo;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import java.util.List;
 
 @Repository
-public class TopoDAOImpl implements TopoDAO {
+public class TopoDAOImpl extends AbstractDAO implements TopoDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(TopoDAOImpl.class);
 
     @Autowired
-    private SessionFactory sessionFactory;
-
-    public void setSessionFactory(SessionFactory sessionFactory){
-        this.sessionFactory = sessionFactory;
+    public TopoDAOImpl(DataSource dataSource) {
+        setDataSource(dataSource);
     }
 
     @Override
     public Topo getTopo(Integer id) {
-        Session session = this.sessionFactory.getCurrentSession();
-        Topo topo = session.load(Topo.class, id);
-        logger.info("Topo successfully loaded !", topo.toString());
+        String querySQL = "SELECT * FROM topo WHERE id = :id";
+
+        NamedParameterJdbcTemplate jdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
+
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("id", id);
+
+        Topo topo = jdbcTemplate.queryForObject(querySQL, params, Topo.class);
+
         return topo;
     }
 
@@ -39,43 +48,60 @@ public class TopoDAOImpl implements TopoDAO {
     @SuppressWarnings("unchecked")
     @Override
     public List<Topo> listNumberTopo(Boolean bookableParameterIsImportant, Boolean bookable, Integer number, Integer offset){
-        StringBuilder sql = new StringBuilder("SELECT t FROM Topo t");
+        StringBuilder sql = new StringBuilder("SELECT * FROM Topo");
+        StringBuilder log = new StringBuilder(" Topo(s) successfully loaded !");
 
-        if (bookableParameterIsImportant != null) {
-            if (bookableParameterIsImportant)
-                sql.append(" WHERE t.is_bookable = :bookable");
+
+        if (bookableParameterIsImportant || number > 0) {
+            log.append(" with the parameters = {");
         }
-
-        sql.append(" ORDER BY t.creation_date DESC");
-
-        Session session = this.sessionFactory.getCurrentSession();
-
-        List<Topo> topos;
 
         if (bookableParameterIsImportant) {
-            if (number > 0 && offset > 0) {
-                topos = session.createQuery(sql.toString()).setParameter("bookable", bookable).setMaxResults(number).setFirstResult(offset).list();
-                logger.info(topos.size() + " Topo(s) successfully loaded !\nParameters = {\n    Bookable = " + bookable + "\n    Limitation = " + number + "\n    Offset = " + offset + "\n}");
-            } else if (number > 0) {
-                topos = session.createQuery(sql.toString()).setParameter("bookable", bookable).setMaxResults(number).list();
-                logger.info(topos.size() + " Topo(s) successfully loaded !\nParameters = {\n    Bookable = " + bookable + "\n    Limitation = " + number + "\n}");
-            } else {
-                topos = session.createQuery(sql.toString()).setParameter("bookable", bookable).list();
-                logger.info(topos.size() + " Topo(s) successfully loaded !\nParameter = {\n    Bookable = " + bookable + "\n}");
+            sql.append(" WHERE is_bookable = :bookable");
+            log.append("\n    Bookable = ").append(bookable);
+
+            if (number <= 0) {
+                log.append("\n}");
             }
         }
-        else {
-            if (number > 0 && offset > 0) {
-                topos = session.createQuery(sql.toString()).setMaxResults(number).setFirstResult(offset).list();
-                logger.info(topos.size() + " Topo(s) successfully loaded !\nParameters = {\n    Limitation = " + number + "\n    Offset = " + offset + "\n}");
-            } else if (number > 0) {
-                topos = session.createQuery(sql.toString()).setMaxResults(number).list();
-                logger.info(topos.size() + " Topo(s) successfully loaded !\nParameter = {\n    Limitation = " + number + "\n}");
-            } else {
-                topos = session.createQuery(sql.toString()).list();
-                logger.info(topos.size() + " Topo(s) successfully loaded !");
+
+        sql.append(" ORDER BY creation_date DESC");
+
+        if (number > 0) {
+            sql.append(" LIMIT :limitation");
+            log.append("\n    Limitation = ").append(number);
+
+            if (offset > 0) {
+                sql.append(" OFFSET :offset");
+                log.append("\n    Offset = ").append(offset).append("\n}");
+            }
+            else {
+                log.append("\n}");
             }
         }
+
+        NamedParameterJdbcTemplate jdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        RowMapper<Topo> rowMapper = new TopoMapper();
+        List<Topo> topos;
+
+        if (bookable != null) {
+            params.addValue("bookable", bookable);
+        }
+
+        if (number > 0) {
+            params.addValue("limitation", number);
+
+            if (offset > 0) {
+                params.addValue("offset", offset);
+            }
+        }
+
+        topos = jdbcTemplate.query(sql.toString(), params, rowMapper);
+
+        log.insert(0, topos.size());
+
+        logger.info(log.toString());
 
         return topos;
     }
@@ -91,6 +117,17 @@ public class TopoDAOImpl implements TopoDAO {
     }
 
     @Override
+    public Integer countSimpleTopo() {
+        String querySQL = "SELECT COUNT(*) FROM topo WHERE is_bookable = 'FALSE'";
+
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
+
+        Integer numberOftopo = jdbcTemplate.queryForObject(querySQL, Integer.class);
+
+        return numberOftopo;
+    }
+
+    @Override
     public List<Topo> listBookableTopo() {
         return listNumberTopo(true, false, 0, 0);
     }
@@ -100,19 +137,9 @@ public class TopoDAOImpl implements TopoDAO {
         return listNumberTopo(true, true, number, offset);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public List<Topo> listAuthorTopo(Integer author_id) {
-        //noinspection JpaQlInspection
-        String sql = "SELECT t FROM Topo t WHERE t.author_id = :author_id ORDER BY t.creation_date";
-
-        Session session = this.sessionFactory.getCurrentSession();
-
-        List<Topo> topos = session.createQuery(sql).setParameter("author_id", author_id).list();
-
-        logger.info(topos.size() + " Topo(s) successfully loaded !");
-
-        return topos;
+        return null;
     }
 
     @Override
