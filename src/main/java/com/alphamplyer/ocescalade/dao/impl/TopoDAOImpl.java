@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -21,14 +22,9 @@ public class TopoDAOImpl extends AbstractDAO implements TopoDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(TopoDAOImpl.class);
 
-    @Autowired
-    public TopoDAOImpl(DataSource dataSource) {
-        setDataSource(dataSource);
-    }
-
     @Override
     public Topo getTopo(Integer id) {
-        String querySQL = "SELECT * FROM topo WHERE id = :id";
+        String querySQL = "SELECT *, count(*) OVER() AS full_count  FROM topo WHERE id = :id";
 
         NamedParameterJdbcTemplate jdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
 
@@ -48,7 +44,7 @@ public class TopoDAOImpl extends AbstractDAO implements TopoDAO {
     @SuppressWarnings("unchecked")
     @Override
     public List<Topo> listNumberTopo(Boolean bookableParameterIsImportant, Boolean bookable, Integer number, Integer offset){
-        StringBuilder sql = new StringBuilder("SELECT * FROM Topo");
+        StringBuilder sql = new StringBuilder("SELECT *, count(*) OVER() AS full_count  FROM Topo");
         StringBuilder log = new StringBuilder(" Topo(s) successfully loaded !");
 
 
@@ -117,8 +113,8 @@ public class TopoDAOImpl extends AbstractDAO implements TopoDAO {
     }
 
     @Override
-    public Integer countSimpleTopo() {
-        String querySQL = "SELECT COUNT(*) FROM topo WHERE is_bookable = 'FALSE'";
+    public Integer countTopo(boolean bookable) {
+        String querySQL = "SELECT COUNT(*) FROM topo WHERE is_bookable = '" + bookable + "'";
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
 
@@ -143,17 +139,59 @@ public class TopoDAOImpl extends AbstractDAO implements TopoDAO {
     }
 
     @Override
-    public List<Topo> listSearchedTopo(String[] args) {
-        return null;
+    public List<Topo> listSearchedTopo(String[] args, Boolean bookable, Integer limit, Integer offset) {
+        StringBuilder querySQL = new StringBuilder("SELECT *, count(*) OVER() AS full_count FROM topo");
+
+        if (bookable != null) {
+            querySQL.append(" WHERE is_bookable = '").append(bookable).append("'");
+        }
+        else {
+            querySQL.append(" WHERE");
+        }
+
+        for (int i = 0; i < args.length; i++) {
+            if (i == 0) {
+                if (bookable != null) {
+                    querySQL.append(" AND");
+                }
+            } else {
+                querySQL.append(" OR");
+            }
+            querySQL.append(" (strpos(lower(topo_title), '").append(args[i]).append("') > 0 OR strpos(lower(topo_description), '").append(args[i]).append("') > 0)");
+        }
+
+        if (limit > 0) {
+            querySQL.append(" LIMIT :limitation");
+
+            if (offset > 0) {
+                querySQL.append(" OFFSET :offset");
+            }
+        }
+
+        NamedParameterJdbcTemplate jdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        RowMapper<Topo> rowMapper = new TopoMapper();
+
+        if (limit > 0) {
+            params.addValue("limitation", limit);
+
+            if (offset > 0) {
+                params.addValue("offset", offset);
+            }
+        }
+
+        List<Topo> topos = jdbcTemplate.query(querySQL.toString(), params, rowMapper);
+
+        return topos;
     }
 
     @Override
-    public List<Topo> listSimpleSearchedTopo(String[] args) {
-        return null;
+    public List<Topo> listSimpleSearchedTopo(String[] args, Integer limit, Integer offset) {
+        return listSearchedTopo(args, false, limit, offset);
     }
 
     @Override
-    public List<Topo> listBookableSearchedTopo(String[] args) {
-        return null;
+    public List<Topo> listBookableSearchedTopo(String[] args, Integer limit, Integer offset) {
+        return listSearchedTopo(args, true, limit, offset);
     }
 }

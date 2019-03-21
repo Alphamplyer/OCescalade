@@ -9,12 +9,6 @@
 <header class="header">
     <div class="l-container">
         <%@ include file="menu.jsp" %>
-        <div class="menu-searchbar searchbar">
-            <input class="searchbar-txt" type="text" placeholder="Search..">
-            <a class="searchbar-bnt" href="">
-                <i class="fas fa-search"></i>
-            </a>
-        </div>
     </div>
     <div class="cb"></div>
     <div class="header-baseline">

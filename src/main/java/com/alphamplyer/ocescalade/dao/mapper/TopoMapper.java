@@ -20,7 +20,7 @@ public class TopoMapper implements RowMapper<Topo> {
         topo.setCreation_date(rs.getTimestamp("creation_date"));
         topo.setTopo_like(rs.getInt("topo_like"));
         topo.setTopo_vues(rs.getInt("topo_vues"));
-
+        topo.setFindedTopo(rs.getInt("full_count"));
         return topo;
     }
 }

@@ -16,7 +16,7 @@ public interface TopoDAO {
 
     List<Topo> listNumberSimpleTopo(Integer number, Integer offset);
 
-    Integer countSimpleTopo();
+    Integer countTopo(boolean bookable);
 
     List<Topo> listBookableTopo();
 
@@ -24,9 +24,9 @@ public interface TopoDAO {
 
     List<Topo> listAuthorTopo(Integer author_id);
 
-    List<Topo> listSearchedTopo(String[] args);
+    List<Topo> listSearchedTopo(String[] args, Boolean bookable, Integer limit, Integer offset);
 
-    List<Topo> listSimpleSearchedTopo(String[] args);
+    List<Topo> listSimpleSearchedTopo(String[] args, Integer limit, Integer offset);
 
-    List<Topo> listBookableSearchedTopo(String[] args);
+    List<Topo> listBookableSearchedTopo(String[] args, Integer limit, Integer offset);
 }

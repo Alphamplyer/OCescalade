@@ -22,6 +22,8 @@ public class Topo {
     private Timestamp end_date;
     private Integer organizer_id;
 
+    private Integer findedTopo;
+
     // ================= Constructors ================== //
 
     public Topo() {}
@@ -101,6 +103,10 @@ public class Topo {
         return organizer_id;
     }
 
+    public Integer getFindedTopo() {
+        return findedTopo;
+    }
+
     // SET ////////////////////////////////////////////////
 
 
@@ -150,6 +156,10 @@ public class Topo {
 
     public void setOrganizer_id(Integer organizer_id) {
         this.organizer_id = organizer_id;
+    }
+
+    public void setFindedTopo(Integer findedTopo) {
+        this.findedTopo = findedTopo;
     }
 
     // ==================== Methods ==================== //

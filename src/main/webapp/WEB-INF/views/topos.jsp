@@ -9,12 +9,6 @@
 <header class="header">
     <div class="l-container">
         <%@ include file="menu.jsp" %>
-        <div class="menu-searchbar searchbar">
-            <input class="searchbar-txt" type="text" placeholder="Search..">
-            <a class="searchbar-bnt" href="">
-                <i class="fas fa-search"></i>
-            </a>
-        </div>
     </div>
     <div class="cb"></div>
     <div class="header-baseline">
@@ -24,12 +18,30 @@
 <section class="section">
     <div class="l-container">
         <h2 class="section-title">Rechercher</h2>
-        <div class="section-searchbar searchbar">
-            <input class="searchbar-txt" type="text" placeholder="Search..">
-            <a class="searchbar-bnt" href="">
+
+        <!-- IF search is global -->
+        <c:if test="${global_search_page}">
+            <form method="get" action="<c:url value="/global_search" />" class="section-searchbar searchbar">
+        </c:if>
+
+        <!-- ELSE -->
+        <c:if test="${!global_search_page}">
+            <!-- IF is bookable page -->
+            <c:if test="${bookable}">
+                <form method="get" action="<c:url value="/bookable_topos_search" />" class="section-searchbar searchbar">
+            </c:if>
+
+            <!-- ELSE -->
+            <c:if test="${!bookable}">
+                <form method="get" action="<c:url value="/topos_search" />" class="section-searchbar searchbar">
+            </c:if>
+        </c:if>
+
+            <input class="searchbar-txt" type="text" placeholder="Search.." name="topo_search" value="${param["topo_search"]}"/>
+            <button class="searchbar-bnt" type="submit"/>
                 <i class="fas fa-search"></i>
-            </a>
-        </div>
+            </button>
+        </form>
 
         <p><c:out value="${number_topo_founded}" /> Topo(s) trouvé(s)</p>
 
@@ -50,34 +62,74 @@
             </c:forEach>
         </div>
 
+        <c:if test="${number_topo_founded > 0}">
+            <!-- IF search is global -->
+            <c:if test="${global_search_page}">
+                <div class="section-page">
+                    <a href="<c:url value="/global_search/1?topo_search=${search}" />" class="section-page-item start <c:if test="${!exist_prev_page}">inactive</c:if>"><span>&lt;&lt;</span></a>
+                    <a href="<c:url value="/global_search/${actual_page - 1}?topo_search=${search}" />" class="section-page-item prev <c:if test="${!exist_prev_page}">inactive</c:if>"><span>&lt;</span></a>
 
-        <div class="section-page">
-            <c:if test="${!exist_prev_page}">
-                <a href="" class="section-page-item prev inactive"><span>&lt;&lt;</span></a>
-                <a href="" class="section-page-item prev inactive"><span>&lt;</span></a>
+                    <a href="" class="section-page-item number"><span><c:out value="${actual_page}" /></span></a>
+
+                    <a href="<c:url value="/global_search/${actual_page + 1}?topo_search=${search}" />" class="section-page-item next <c:if test="${!exist_next_page}">inactive</c:if>"><span>&gt;</span></a>
+                    <a href="<c:url value="/global_search/${max_page}?topo_search=${search}" />" class="section-page-item end <c:if test="${!exist_next_page}">inactive</c:if>"><span>&gt;&gt;</span></a>
+                </div>
             </c:if>
-            <c:if test="${exist_prev_page}">
-                <a href="topos/1" class="section-page-item start">
-                    <span>&lt;&lt;</span>
-                </a>
-                <a href="topos/${actual_page - 1}" class="section-page-item prev">
-                    <span>&lt;</span>
-                </a>
+            <!-- ELSE -->
+            <c:if test="${!global_search_page}">
+                <!-- IF is bookable page -->
+                <c:if test="${bookable}">
+                    <c:if test="${search != null}">
+                        <div class="section-page">
+                            <a href="<c:url value="/bookable_topos_search/1?topo_search=${search}" />" class="section-page-item start <c:if test="${!exist_prev_page}">inactive</c:if>"><span>&lt;&lt;</span></a>
+                            <a href="<c:url value="/bookable_topos_search/${actual_page - 1}?topo_search=${search}" />" class="section-page-item prev <c:if test="${!exist_prev_page}">inactive</c:if>"><span>&lt;</span></a>
+
+                            <a href="" class="section-page-item number"><span><c:out value="${actual_page}" /></span></a>
+
+                            <a href="<c:url value="/bookable_topos_search/${actual_page + 1}?topo_search=${search}" />" class="section-page-item next <c:if test="${!exist_next_page}">inactive</c:if>"><span>&gt;</span></a>
+                            <a href="<c:url value="/bookable_topos_search/${max_page}?topo_search=${search}" />" class="section-page-item end <c:if test="${!exist_next_page}">inactive</c:if>"><span>&gt;&gt;</span></a>
+                        </div>
+                    </c:if>
+                    <c:if test="${search == null}">
+                        <div class="section-page">
+                            <a href="<c:url value="/bookable_topos/1" />" class="section-page-item start <c:if test="${!exist_prev_page}">inactive</c:if>"><span>&lt;&lt;</span></a>
+                            <a href="<c:url value="/bookable_topos/${actual_page - 1}" />" class="section-page-item prev <c:if test="${!exist_prev_page}">inactive</c:if>"><span>&lt;</span></a>
+
+                            <a href="" class="section-page-item number"><span><c:out value="${actual_page}" /></span></a>
+
+                            <a href="<c:url value="/bookable_topos/${actual_page + 1}" />" class="section-page-item next <c:if test="${!exist_next_page}">inactive</c:if>"><span>&gt;</span></a>
+                            <a href="<c:url value="/bookable_topos/${max_page}" />" class="section-page-item end <c:if test="${!exist_next_page}">inactive</c:if>"><span>&gt;&gt;</span></a>
+                        </div>
+                    </c:if>
+                </c:if>
+
+                <!-- ELSE -->
+                <c:if test="${!bookable}">
+                    <c:if test="${search != null}">
+                        <div class="section-page">
+                            <a href="<c:url value="/topos_search/1?topo_search=${search}" />" class="section-page-item start <c:if test="${!exist_prev_page}">inactive</c:if>"><span>&lt;&lt;</span></a>
+                            <a href="<c:url value="/topos_search/${actual_page - 1}?topo_search=${search}" />" class="section-page-item prev <c:if test="${!exist_prev_page}">inactive</c:if>"><span>&lt;</span></a>
+
+                            <a href="" class="section-page-item number"><span><c:out value="${actual_page}" /></span></a>
+
+                            <a href="<c:url value="/topos_search/${actual_page + 1}?topo_search=${search}" />" class="section-page-item next <c:if test="${!exist_next_page}">inactive</c:if>"><span>&gt;</span></a>
+                            <a href="<c:url value="/topos_search/${max_page}?topo_search=${search}" />" class="section-page-item end <c:if test="${!exist_next_page}">inactive</c:if>"><span>&gt;&gt;</span></a>
+                        </div>
+                    </c:if>
+                    <c:if test="${search == null}">
+                        <div class="section-page">
+                            <a href="<c:url value="/topos/1" />" class="section-page-item start <c:if test="${!exist_prev_page}">inactive</c:if>"><span>&lt;&lt;</span></a>
+                            <a href="<c:url value="/topos/${actual_page - 1}" />" class="section-page-item prev <c:if test="${!exist_prev_page}">inactive</c:if>"><span>&lt;</span></a>
+
+                            <a href="" class="section-page-item number"><span><c:out value="${actual_page}" /></span></a>
+
+                            <a href="<c:url value="/topos/${actual_page + 1}" />" class="section-page-item next <c:if test="${!exist_next_page}">inactive</c:if>"><span>&gt;</span></a>
+                            <a href="<c:url value="/topos/${max_page}" />" class="section-page-item end <c:if test="${!exist_next_page}">inactive</c:if>"><span>&gt;&gt;</span></a>
+                        </div>
+                    </c:if>
+                </c:if>
             </c:if>
-            <a href="" class="section-page-item number"><span><c:out value="${actual_page}" /></span></a>
-            <c:if test="${!exist_next_page}">
-                <a href="" class="section-page-item next inactive"><span>&gt;</span></a>
-                <a href="" class="section-page-item end inactive"><span>&gt;&gt;</span></a>
-            </c:if>
-            <c:if test="${exist_next_page}">
-                <a href="topos/${actual_page + 1}" class="section-page-item next">
-                    <span>&gt;</span>
-                </a>
-                <a href="topos/${max_page}" class="section-page-item end">
-                    <span>&gt;&gt;</span>
-                </a>
-            </c:if>
-        </div>
+        </c:if>
     </div>
 </section>
 

@@ -51,8 +51,8 @@ public class TopoServiceImpl implements TopoService {
 
     @Override
     @Transactional
-    public Integer countSimpleTopo() {
-        return this.topoDAO.countSimpleTopo();
+    public Integer countTopo(boolean bookable) {
+        return this.topoDAO.countTopo(bookable);
     }
 
     @Override
@@ -75,19 +75,19 @@ public class TopoServiceImpl implements TopoService {
 
     @Override
     @Transactional
-    public List<Topo> listSearchedTopo(String[] args) {
-        return this.topoDAO.listSearchedTopo(args);
+    public List<Topo> listSearchedTopo(String[] args, Boolean bookable, Integer limit, Integer offset) {
+        return this.topoDAO.listSearchedTopo(args, bookable, limit, offset);
     }
 
     @Override
     @Transactional
-    public List<Topo> listSimpleSearchedTopo(String[] args) {
-        return listSimpleSearchedTopo(args);
+    public List<Topo> listSimpleSearchedTopo(String[] args, Integer limit, Integer offset) {
+        return this.topoDAO.listSimpleSearchedTopo(args, limit, offset);
     }
 
     @Override
     @Transactional
-    public List<Topo> listBookableSearchedTopo(String[] args) {
-        return listBookableSearchedTopo(args);
+    public List<Topo> listBookableSearchedTopo(String[] args, Integer limit, Integer offset) {
+        return this.topoDAO.listBookableSearchedTopo(args, limit, offset);
     }
 }
