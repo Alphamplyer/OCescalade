@@ -1,0 +1,110 @@
+html, body {
+  margin: 0;
+  padding: 0; }
+
+body {
+  background-image: url("../images/connection/background.jpg");
+  background-position: center;
+  -webkit-background-size: cover;
+  background-size: cover;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  line-height: 1.75; }
+
+.connection_center, .register_center {
+  width: 350px;
+  height: 450px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.85);
+  border: 1px solid #474747;
+  padding: 20px; }
+  .connection_center h1, .register_center h1 {
+    color: #FFF;
+    margin: 40px 0 55px 0;
+    width: 350px;
+    text-align: center;
+    padding: 0;
+    font-size: 30px;
+    font-weight: 300;
+    line-height: 57px;
+    letter-spacing: 6px;
+    text-transform: uppercase; }
+  .connection_center p, .register_center p {
+    color: #FFF;
+    width: 340px;
+    text-align: left;
+    margin: 25px 5px 5px 15px;
+    font-size: 14px;
+    line-height: 1.30;
+    text-transform: uppercase;
+    letter-spacing: 2px; }
+  .connection_center .connection_sign_comment, .register_center .connection_sign_comment {
+    width: 350px;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 1px;
+    margin: 20px 0 0 0; }
+    .connection_center .connection_sign_comment a, .register_center .connection_sign_comment a {
+      color: #606fff; }
+  .connection_center form, .register_center form {
+    width: 350px; }
+    .connection_center form input, .register_center form input {
+      color: #CCC;
+      width: 330px;
+      margin: 5px 10px;
+      border: none;
+      height: 40px;
+      padding: 8px;
+      border-radius: 20px;
+      background-color: #32384b; }
+    .connection_center form input[type="button"], .register_center form input[type="button"] {
+      background-color: #6768e6;
+      color: #FFF;
+      margin: 25px 75px 10px 75px;
+      width: 200px; }
+      .connection_center form input[type="button"]:hover, .register_center form input[type="button"]:hover {
+        background-color: #7779e6; }
+
+.register_center {
+  width: 550px;
+  height: 600px; }
+  .register_center h1 {
+    width: 550px;
+    text-align: center;
+    margin: 15px 0 5px 0; }
+  .register_center p {
+    width: 540px;
+    margin: 25px 5px 5px 15px; }
+  .register_center .connection_sign_comment {
+    width: 550px;
+    margin: 20px 0 0 0; }
+  .register_center form {
+    width: 550px; }
+    .register_center form input {
+      width: 530px;
+      margin: 5px 10px;
+      height: 40px;
+      padding: 8px;
+      border-radius: 20px;
+      background-color: #32384b; }
+    .register_center form input[type="button"] {
+      margin: 25px 175px 10px 175px;
+      width: 200px; }
+      .register_center form input[type="button"]:hover {
+        background-color: #7779e6; }
+    .register_center form .register_two_column {
+      width: 550px;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      flex-wrap: nowrap;
+      -webkit-flex-flow: row nowrap; }
+      .register_center form .register_two_column p, .register_center form .register_two_column input {
+        flex-grow: 1; }
+
+/*# sourceMappingURL=connection_style.css.map */

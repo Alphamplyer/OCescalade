@@ -9,7 +9,7 @@ public class User {
     private Integer id;
 
     private String first_name;
-    private String second_name;
+    private String last_name;
     private String nickname;
 
     private String mail;
@@ -39,17 +39,17 @@ public class User {
      * Constructor
      * @param id -
      * @param first_name -
-     * @param second_name -
+     * @param last_name -
      * @param nickname -
      * @param password -
      * @param inscription_date -
      * @param mail -
      * @param permission_level -
      */
-    public User(Integer id, String first_name, String second_name, String nickname, String password, Date inscription_date, String mail, Integer permission_level) {
+    public User(Integer id, String first_name, String last_name, String nickname, String password, Date inscription_date, String mail, Integer permission_level) {
         this.id = id;
         this.first_name = first_name;
-        this.second_name = second_name;
+        this.last_name = last_name;
         this.nickname = nickname;
         this.password = password;
         this.inscription_date = inscription_date;
@@ -96,16 +96,16 @@ public class User {
      * Get User second name
      * @return User second name
      */
-    public String getSecond_name() {
-        return second_name;
+    public String getLast_name() {
+        return last_name;
     }
 
     /**
      * Set User second name
-     * @param second_name New User second name
+     * @param last_name New User second name
      */
-    public void setSecond_name(String second_name) {
-        this.second_name = second_name;
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
 
     /**
@@ -213,7 +213,7 @@ public class User {
         vStB.append(" {\n")
             .append("         User ID =").append(id)
             .append(vSEP).append("      first name = \"").append(first_name).append('"')
-            .append(vSEP).append("     second name = \"").append(second_name).append('"')
+            .append(vSEP).append("     second name = \"").append(last_name).append('"')
             .append(vSEP).append("        nickname = \"").append(nickname).append('"')
             .append(vSEP).append("        password = \"").append(password).append('"')
             .append(vSEP).append("        Birthday = \"").append(birthday).append('"')

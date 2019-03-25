@@ -68,7 +68,7 @@ public class ToposController {
 
         System.out.println("OKKKKKKKKKKKKKK");
 
-        List<Topo> topos = this.topoService.listSimpleSearchedTopo(splitArgs(topo_search), 10, 0);
+        List<Topo> topos = this.topoService.listSimpleSearchedTopo(topo_search, 10, 0);
         topoTreatment(model, 1, false, false, topos);
 
         model.addAttribute("search", topo_search.replaceAll("\\s+", "+"));
@@ -82,7 +82,7 @@ public class ToposController {
             return "redirect:topos";
         }
 
-        List<Topo> topos = this.topoService.listSimpleSearchedTopo(splitArgs(topo_search), MAX_TOPO_BY_PAGE, (id - 1) * MAX_TOPO_BY_PAGE);
+        List<Topo> topos = this.topoService.listSimpleSearchedTopo(topo_search, MAX_TOPO_BY_PAGE, (id - 1) * MAX_TOPO_BY_PAGE);
         topoTreatment(model, id, false, false, topos);
 
         model.addAttribute("search", topo_search.replaceAll("\\s+", "+"));
@@ -96,7 +96,7 @@ public class ToposController {
             return "redirect:bookable_topos";
         }
 
-        List<Topo> topos = this.topoService.listBookableSearchedTopo(splitArgs(topo_search), 10, 0);
+        List<Topo> topos = this.topoService.listBookableSearchedTopo(topo_search, 10, 0);
         topoTreatment(model, 1, false, true, topos);
 
         model.addAttribute("search", topo_search.replaceAll("\\s+", "+"));
@@ -110,7 +110,7 @@ public class ToposController {
             return "redirect:bookable_topos";
         }
 
-        List<Topo> topos = this.topoService.listBookableSearchedTopo(splitArgs(topo_search), MAX_TOPO_BY_PAGE, (id - 1) * MAX_TOPO_BY_PAGE);
+        List<Topo> topos = this.topoService.listBookableSearchedTopo(topo_search, MAX_TOPO_BY_PAGE, (id - 1) * MAX_TOPO_BY_PAGE);
         topoTreatment(model, id, false, true, topos);
 
         model.addAttribute("search", topo_search.replaceAll("\\s+", "+"));
@@ -121,7 +121,7 @@ public class ToposController {
     @RequestMapping(value = "/global_search", method = RequestMethod.GET)
     public String globalSearch(@RequestParam("topo_search") String topo_search, Model model) {
 
-        List<Topo> topos = this.topoService.listSearchedTopo(splitArgs(topo_search), null, 10, 0);
+        List<Topo> topos = this.topoService.listSearchedTopo(topo_search, null, 10, 0);
         topoTreatment(model, 1, true, null, topos);
 
         model.addAttribute("search", topo_search.replaceAll("\\s+", "+"));
@@ -132,7 +132,7 @@ public class ToposController {
     @RequestMapping(value = "/global_search/{id}", method = RequestMethod.GET)
     public String globalSearch(@RequestParam("topo_search") String topo_search, @PathVariable int id, Model model) {
 
-        List<Topo> topos = this.topoService.listSearchedTopo(splitArgs(topo_search), null, MAX_TOPO_BY_PAGE, (id - 1) * MAX_TOPO_BY_PAGE);
+        List<Topo> topos = this.topoService.listSearchedTopo(topo_search, null, MAX_TOPO_BY_PAGE, (id - 1) * MAX_TOPO_BY_PAGE);
         topoTreatment(model, id, true, null, topos);
 
         model.addAttribute("search", topo_search.replaceAll("\\s+", "+"));
@@ -174,18 +174,6 @@ public class ToposController {
 
     private int maxPage (int topoNumber) {
         return (int)Math.ceil(topoNumber / (float)MAX_TOPO_BY_PAGE);
-    }
-
-    private String[] splitArgs(String s) {
-
-        s = s.toLowerCase();
-
-        String[] args = s.split("\\s+");
-
-        if (args.length == 0)
-            args = new String[] { s };
-
-        return args;
     }
 
     private void setupAttribute(Model model, int page_id, int max_page, boolean exit_prev_page, boolean exit_next_page, boolean global_search_page, Boolean bookable, List<Topo> topos, int number_topo_founded) {

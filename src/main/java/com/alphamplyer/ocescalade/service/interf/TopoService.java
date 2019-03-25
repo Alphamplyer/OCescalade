@@ -24,9 +24,9 @@ public interface TopoService {
 
     List<Topo> listAuthorTopo(Integer author_id);
 
-    List<Topo> listSearchedTopo(String[] args, Boolean bookable, Integer limit, Integer offset);
+    List<Topo> listSearchedTopo(String args, Boolean bookable, Integer limit, Integer offset);
 
-    List<Topo> listSimpleSearchedTopo(String[] args, Integer limit, Integer offset);
+    List<Topo> listSimpleSearchedTopo(String args, Integer limit, Integer offset);
 
-    List<Topo> listBookableSearchedTopo(String[] args, Integer limit, Integer offset);
+    List<Topo> listBookableSearchedTopo(String args, Integer limit, Integer offset);
 }

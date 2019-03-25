@@ -75,19 +75,31 @@ public class TopoServiceImpl implements TopoService {
 
     @Override
     @Transactional
-    public List<Topo> listSearchedTopo(String[] args, Boolean bookable, Integer limit, Integer offset) {
-        return this.topoDAO.listSearchedTopo(args, bookable, limit, offset);
+    public List<Topo> listSearchedTopo(String args, Boolean bookable, Integer limit, Integer offset) {
+        return this.topoDAO.listSearchedTopo(splitArgs(args), bookable, limit, offset);
     }
 
     @Override
     @Transactional
-    public List<Topo> listSimpleSearchedTopo(String[] args, Integer limit, Integer offset) {
-        return this.topoDAO.listSimpleSearchedTopo(args, limit, offset);
+    public List<Topo> listSimpleSearchedTopo(String args, Integer limit, Integer offset) {
+        return this.topoDAO.listSimpleSearchedTopo(splitArgs(args), limit, offset);
     }
 
     @Override
     @Transactional
-    public List<Topo> listBookableSearchedTopo(String[] args, Integer limit, Integer offset) {
-        return this.topoDAO.listBookableSearchedTopo(args, limit, offset);
+    public List<Topo> listBookableSearchedTopo(String args, Integer limit, Integer offset) {
+        return this.topoDAO.listBookableSearchedTopo(splitArgs(args), limit, offset);
+    }
+
+    private String[] splitArgs(String s) {
+
+        s = s.toLowerCase();
+
+        String[] args = s.split("\\s+");
+
+        if (args.length == 0)
+            args = new String[] { s };
+
+        return args;
     }
 }

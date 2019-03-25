@@ -4,8 +4,10 @@ import javax.sql.DataSource;
 
 import com.alphamplyer.ocescalade.service.impl.CommentServiceImpl;
 import com.alphamplyer.ocescalade.service.impl.TopoServiceImpl;
+import com.alphamplyer.ocescalade.service.impl.UserServiceImpl;
 import com.alphamplyer.ocescalade.service.interf.CommentService;
 import com.alphamplyer.ocescalade.service.interf.TopoService;
+import com.alphamplyer.ocescalade.service.interf.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -67,5 +69,10 @@ public class ApplicationContextConfig {
     @Bean(name = "commentService")
     public CommentService getCommentService() {
         return new CommentServiceImpl();
+    }
+
+    @Bean(name = "userService")
+    public UserService getUserService() {
+        return new UserServiceImpl();
     }
 }
