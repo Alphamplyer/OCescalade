@@ -1,6 +1,10 @@
 class Carousel {
 
     /**
+     * According to the carousel tutorial of Grafikart !
+     */
+
+    /**
      * This callback is displayed as part of the Requester class.
      * @callback moveCallback
      * @param {number} index

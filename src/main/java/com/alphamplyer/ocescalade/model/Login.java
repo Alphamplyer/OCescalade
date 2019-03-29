@@ -5,6 +5,13 @@ public class Login {
     private String password;
     private String username;
 
+
+    public Login (String nickname, String password) {
+        this.username = nickname;
+        this.password = password;
+    }
+
+
     public String getPassword() {
         return password;
     }

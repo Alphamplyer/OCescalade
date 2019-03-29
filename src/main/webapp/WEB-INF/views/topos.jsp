@@ -57,7 +57,7 @@
                             <span><c:out value="${listTopo.topo_vues}" /></span><i class="far fa-heart"></i>
                         </div>
                     </div>
-                    <a href="" class="article-learn-more"><span>></span></a>
+                    <a href="<c:url value="/topo/${listTopo.id}" />" class="article-learn-more"><span>></span></a>
                 </article>
             </c:forEach>
         </div>

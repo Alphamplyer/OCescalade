@@ -6,15 +6,12 @@ import com.alphamplyer.ocescalade.dao.mapper.TopoMapper;
 import com.alphamplyer.ocescalade.model.Topo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import javax.sql.DataSource;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -30,8 +27,9 @@ public class TopoDAOImpl extends AbstractDAO implements TopoDAO {
 
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("id", id);
+        RowMapper<Topo> rowMapper = new TopoMapper();
 
-        Topo topo = jdbcTemplate.queryForObject(querySQL, params, Topo.class);
+        Topo topo = jdbcTemplate.queryForObject(querySQL, params, rowMapper);
 
         return topo;
     }

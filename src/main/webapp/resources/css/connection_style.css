@@ -60,12 +60,14 @@ body {
       padding: 8px;
       border-radius: 20px;
       background-color: #32384b; }
-    .connection_center form input[type="button"], .register_center form input[type="button"] {
+      .connection_center form input.failed, .register_center form input.failed {
+        border: 1px solid #ff3a35; }
+    .connection_center form input[type="submit"], .register_center form input[type="submit"] {
       background-color: #6768e6;
       color: #FFF;
       margin: 25px 75px 10px 75px;
       width: 200px; }
-      .connection_center form input[type="button"]:hover, .register_center form input[type="button"]:hover {
+      .connection_center form input[type="submit"]:hover, .register_center form input[type="submit"]:hover {
         background-color: #7779e6; }
 
 .register_center {
@@ -90,10 +92,12 @@ body {
       padding: 8px;
       border-radius: 20px;
       background-color: #32384b; }
-    .register_center form input[type="button"] {
+      .register_center form input.failed {
+        border: 1px solid #ff3a35; }
+    .register_center form input[type="submit"] {
       margin: 25px 175px 10px 175px;
       width: 200px; }
-      .register_center form input[type="button"]:hover {
+      .register_center form input[type="submit"]:hover {
         background-color: #7779e6; }
     .register_center form .register_two_column {
       width: 550px;

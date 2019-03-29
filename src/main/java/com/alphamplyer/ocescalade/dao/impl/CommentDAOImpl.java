@@ -36,7 +36,7 @@ public class CommentDAOImpl extends AbstractDAO implements CommentDAO {
     public List<Comment> getNumberComment(Integer number, Integer offset) {
         StringBuilder sql = new StringBuilder("SELECT c.id, c.topo_id, c.user_id, c.comment_content, c.creation_date, c.reply, c.parent_id, c.edited,")
             .append(" t.topo_title,")
-            .append(" u.id, u.first_name, u.second_name, u.nickname, u.password, u.inscription_date, u.mail, u.permission_level FROM comment c")
+            .append(" u.id, u.nickname, u.inscription_date, u.permission_level FROM comment c")
             .append(" INNER JOIN topo t ON c.topo_id = t.id")
             .append(" INNER JOIN users u ON c.user_id = u.id")
             .append(" ORDER BY c.creation_date DESC");

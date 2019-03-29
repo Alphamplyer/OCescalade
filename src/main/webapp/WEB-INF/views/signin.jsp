@@ -12,13 +12,13 @@
 <body>
     <div class="connection_center">
         <h1>Connexion</h1>
-        <form action="">
-            <p>Email</p>
-            <input type="email">
+        <form action="<c:url value="/signin_process" />" method="post">
+            <p>Pseudo</p>
+            <input class="<c:if test="${failed || invalid_nickname}"></c:if>" name="nickname" type="text" value="${nickname}">
             <p>Mot de passe</p>
-            <input type="password">
+            <input class="<c:if test="${failed}"></c:if>" name="password" type="password">
             <p class="connection_sign_comment">Vous n'avez pas de compte ? <a href="<c:url value="/signup" />">Créer un compte</a></p>
-            <input type="button" value="Connexion">
+            <input type="submit" value="Connexion">
         </form>
     </div>
 </body>

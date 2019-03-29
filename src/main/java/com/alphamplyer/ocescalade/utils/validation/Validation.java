@@ -1,4 +1,4 @@
-package com.alphamplyer.ocescalade.utils;
+package com.alphamplyer.ocescalade.utils.validation;
 
 public interface Validation {
 

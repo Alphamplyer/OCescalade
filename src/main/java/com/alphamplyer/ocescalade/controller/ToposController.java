@@ -29,7 +29,7 @@ public class ToposController {
     }
 
     @RequestMapping("/topos")
-    public String topoPage(Model model) {
+    public String toposPage(Model model) {
         List<Topo> topos = simpleTopoRequest(false, 1);
         topoTreatment(model, 1, false, false, topos);
 
@@ -37,7 +37,7 @@ public class ToposController {
     }
 
     @RequestMapping("/topos/{id}")
-    public String topoPageWithGivenPage (@PathVariable int id, Model model) {
+    public String toposPageWithGivenPage (@PathVariable int id, Model model) {
         List<Topo> topos = simpleTopoRequest(false, id);
         topoTreatment(model, id, false, false, topos);
 
@@ -45,7 +45,7 @@ public class ToposController {
     }
 
     @RequestMapping("/bookable_topos")
-    public String bookableTopoPage(Model model) {
+    public String bookableToposPage(Model model) {
         List<Topo> topos = simpleTopoRequest(true, 1);
         topoTreatment(model, 1, false, true, topos);
 
@@ -53,7 +53,7 @@ public class ToposController {
     }
 
     @RequestMapping("/bookable_topos/{id}")
-    public String bookableTopoPageWithGivenPage (@PathVariable int id, Model model) {
+    public String bookableToposPageWithGivenPage (@PathVariable int id, Model model) {
         List<Topo> topos = simpleTopoRequest(true, id);
         topoTreatment(model, id, false, true, topos);
 
@@ -61,7 +61,7 @@ public class ToposController {
     }
 
     @RequestMapping(value = "/topos_search", method = RequestMethod.GET)
-    public String topoSearch(@RequestParam("topo_search") String topo_search, Model model) {
+    public String toposSearch(@RequestParam("topo_search") String topo_search, Model model) {
         if (topo_search.length() <= 0) {
             return "redirect:topos";
         }
@@ -77,7 +77,7 @@ public class ToposController {
     }
 
     @RequestMapping(value = "/topos_search/{id}", method = RequestMethod.GET)
-    public String topoSearch(@RequestParam("topo_search") String topo_search, @PathVariable int id, Model model) {
+    public String toposSearch(@RequestParam("topo_search") String topo_search, @PathVariable int id, Model model) {
         if (topo_search.length() <= 0) {
             return "redirect:topos";
         }
@@ -91,7 +91,7 @@ public class ToposController {
     }
 
     @RequestMapping(value = "/bookable_topos_search", method = RequestMethod.GET)
-    public String bookableTopoSearch(@RequestParam("topo_search") String topo_search, Model model) {
+    public String bookableToposSearch(@RequestParam("topo_search") String topo_search, Model model) {
         if (topo_search.length() <= 0) {
             return "redirect:bookable_topos";
         }
@@ -105,7 +105,7 @@ public class ToposController {
     }
 
     @RequestMapping(value = "/bookable_topos_search/{id}", method = RequestMethod.GET)
-    public String bookableTopoSearch(@RequestParam("topo_search") String topo_search, @PathVariable int id, Model model) {
+    public String bookableToposSearch(@RequestParam("topo_search") String topo_search, @PathVariable int id, Model model) {
         if (topo_search.length() <= 0) {
             return "redirect:bookable_topos";
         }

@@ -28,7 +28,9 @@ public class Topo {
 
     public Topo() {}
 
-    public Topo(Integer id) {}
+    public Topo(Integer id) {
+        this.id = id;
+    }
 
     public Topo(Integer id, Integer author_id,
                 String topo_title, String topo_description, String topo_content,

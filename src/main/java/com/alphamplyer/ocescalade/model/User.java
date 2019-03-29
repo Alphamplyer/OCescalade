@@ -14,6 +14,7 @@ public class User {
 
     private String mail;
     private String password;
+    private String salt;
 
     private Date birthday;
     private Date inscription_date;
@@ -46,17 +47,17 @@ public class User {
      * @param mail -
      * @param permission_level -
      */
-    public User(Integer id, String first_name, String last_name, String nickname, String password, Date inscription_date, String mail, Integer permission_level) {
+    public User(Integer id, String first_name, String last_name, String nickname, String password, String salt, Date inscription_date, String mail, Integer permission_level) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.nickname = nickname;
         this.password = password;
+        this.salt = salt;
         this.inscription_date = inscription_date;
         this.mail = mail;
         this.permission_level = permission_level;
     }
-
 
     // ==================== Getters/Setters ==================== //
 
@@ -138,6 +139,14 @@ public class User {
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     /**

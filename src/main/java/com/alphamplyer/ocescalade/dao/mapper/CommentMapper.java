@@ -15,16 +15,13 @@ public class CommentMapper implements RowMapper<Comment> {
         comment.setTopo_id(rs.getInt("topo_id"));
         comment.setTopo_title(rs.getString("topo_title"));
 
-        comment.setUser(new User(
-            rs.getInt("user_id"),
-            rs.getString("first_name"),
-            rs.getString("second_name"),
-            rs.getString("nickname"),
-            rs.getString("password"),
-            rs.getDate("inscription_date"),
-            rs.getString("mail"),
-            rs.getInt("permission_level")
-        ));
+        User user = new User(rs.getInt("user_id"));
+
+        user.setNickname(rs.getString("nickname"));
+        user.setInscription_date(rs.getDate("inscription_date"));
+        user.setPermission_level(rs.getInt("permission_level"));
+
+        comment.setUser(user);
 
         comment.setComment_content(rs.getString("comment_content"));
         comment.setCreation_date(rs.getTimestamp("creation_date"));
