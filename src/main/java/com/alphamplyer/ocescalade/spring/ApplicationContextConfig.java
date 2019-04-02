@@ -2,12 +2,8 @@ package com.alphamplyer.ocescalade.spring;
 
 import javax.sql.DataSource;
 
-import com.alphamplyer.ocescalade.service.impl.CommentServiceImpl;
-import com.alphamplyer.ocescalade.service.impl.TopoServiceImpl;
-import com.alphamplyer.ocescalade.service.impl.UserServiceImpl;
-import com.alphamplyer.ocescalade.service.interf.CommentService;
-import com.alphamplyer.ocescalade.service.interf.TopoService;
-import com.alphamplyer.ocescalade.service.interf.UserService;
+import com.alphamplyer.ocescalade.service.impl.*;
+import com.alphamplyer.ocescalade.service.interf.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -74,5 +70,25 @@ public class ApplicationContextConfig {
     @Bean(name = "userService")
     public UserService getUserService() {
         return new UserServiceImpl();
+    }
+
+    @Bean(name = "siteService")
+    public SiteService getSiteService() {
+        return new SiteServiceImpl();
+    }
+
+    @Bean(name = "sectorService")
+    public SectorService getSectorService() {
+        return new SectorServiceImpl();
+    }
+
+    @Bean(name = "wayService")
+    public WayService getWayService() {
+        return new WayServiceImpl();
+    }
+
+    @Bean(name = "imageService")
+    public ImageService getImageService() {
+        return new ImageServiceImpl();
     }
 }

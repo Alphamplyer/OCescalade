@@ -8,5 +8,9 @@ public interface CommentDAO {
 
     public List<Comment> getAllComment();
 
+    List<Comment> getTopoComments(Integer topo_id);
+
+    List<Comment> getCommentReply(Integer comment_id);
+
     public List<Comment> getNumberComment(Integer number, Integer offset);
 }

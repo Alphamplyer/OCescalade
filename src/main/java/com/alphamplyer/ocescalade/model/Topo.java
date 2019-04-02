@@ -175,7 +175,7 @@ public class Topo {
             .append(vSEP).append("  ID = ").append(id)
             .append(vSEP).append("  Author ID = \"").append(author_id).append('"')
             .append(vSEP).append("  Title = \"").append(topo_title).append('"')
-            .append(vSEP).append("  Topo topo_description = \"").append(topo_description).append('"')
+            .append(vSEP).append("  Topo description = \"").append(topo_description).append('"')
             .append(vSEP).append("  Topo Content = \"").append(topo_content).append('"')
             .append(vSEP).append("  Creation Date = \"").append(creation_date).append('"')
             .append(vSEP).append("  Number of Like = \"").append(topo_like).append('"')

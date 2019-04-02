@@ -17,8 +17,7 @@ a {
 
 p {
   padding: 0;
-  margin: 0;
-  margin-bottom: 20px; }
+  margin: 0 0 20px 0; }
 
 h1 {
   margin: 0;
@@ -301,6 +300,68 @@ footer {
       .article-learn-more:hover span {
         color: #FFF; }
 
+.article_site {
+  background-color: #e0e9ff;
+  margin-bottom: 20px; }
+  .article_site h3, .article_site h4 {
+    text-transform: uppercase; }
+  .article_site_header {
+    position: relative;
+    padding: 10px;
+    background-color: #999db6;
+    height: 70px; }
+    .article_site_header_title, .article_site_header_description, .article_site_header span {
+      margin: 0;
+      padding: 0;
+      color: #ffffff; }
+    .article_site_header_title, .article_site_header_description {
+      position: absolute;
+      left: 10px; }
+    .article_site_header_title {
+      top: 12px;
+      color: #282d35; }
+    .article_site_header_description {
+      top: 34px; }
+    .article_site_header span {
+      position: absolute;
+      right: 10px; }
+    .article_site_header_rocktype {
+      top: 12px; }
+    .article_site_header_elevation {
+      top: 34px; }
+  .article_site_body {
+    padding: 10px; }
+    .article_site_body .sector {
+      position: relative;
+      background-color: #c7c3f1;
+      height: 70px;
+      color: #282d35; }
+      .article_site_body .sector h4, .article_site_body .sector p, .article_site_body .sector .sector_orientation, .article_site_body .sector a {
+        position: absolute; }
+      .article_site_body .sector h4, .article_site_body .sector p {
+        left: 10px; }
+      .article_site_body .sector h4 {
+        top: 12px; }
+      .article_site_body .sector p {
+        top: 32px; }
+      .article_site_body .sector .sector_orientation {
+        top: 21px;
+        right: 70px; }
+      .article_site_body .sector a {
+        right: 0;
+        top: 0;
+        width: 50px;
+        height: 70px;
+        text-align: center;
+        line-height: 70px;
+        background-color: #7781ce;
+        color: #FFFFFF; }
+        .article_site_body .sector a:hover {
+          background-color: #8694ce; }
+      .article_site_body .sector h4 {
+        top: 12px;
+        margin: 0; }
+
 .topo-articles {
   width: 100%;
   margin-bottom: 70px; }
@@ -330,6 +391,55 @@ footer {
     background: #85939c;
     pointer-events: none;
     cursor: default; }
+
+.topo_comment {
+  background-color: #eaebfc;
+  padding: 15px;
+  margin-bottom: 20px; }
+  .topo_comment .comment_username {
+    font-weight: bold;
+    color: #282d35;
+    margin-bottom: 0; }
+  .topo_comment .comment_date {
+    margin-top: 0; }
+  .topo_comment .comment_content {
+    margin: 0; }
+  .topo_comment .comment_date, .topo_comment .comment_edited {
+    font-size: 11px; }
+
+.topo_reply_comment {
+  background-color: #c8cae0;
+  margin: 20px 10px 10px 10px; }
+
+.comment_section {
+  position: relative;
+  margin-bottom: 70px; }
+  .comment_section_input textarea {
+    resize: none;
+    font-weight: 400;
+    width: 100%;
+    height: 80px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #282d35;
+    padding: 10px 15px;
+    border: none;
+    outline: none;
+    color: #AAA;
+    font-size: 16px;
+    border-radius: 10px;
+    margin-bottom: 10px; }
+  .comment_section_input input[type="submit"] {
+    float: right;
+    border: none;
+    outline: none;
+    background-color: #6571ce;
+    color: #FFF;
+    width: 120px;
+    height: 40px;
+    border-radius: 20px; }
+    .comment_section_input input[type="submit"]:hover {
+      background-color: #8187d7; }
 
 @media screen and (min-width: 900px) {
   .article-image {

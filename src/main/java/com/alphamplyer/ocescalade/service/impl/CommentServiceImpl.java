@@ -25,6 +25,24 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     @Transactional
+    public List<Comment> getTopoComments(Integer topo_id) {
+        List<Comment> comments = this.commentDAO.getTopoComments(topo_id);
+
+        for (Comment comment: comments) {
+            comment.setReply_comments(this.commentDAO.getCommentReply(comment.getId()));
+        }
+
+        return comments;
+    }
+
+    @Override
+    @Transactional
+    public List<Comment> getCommentReply(Integer comment_id) {
+        return this.commentDAO.getCommentReply(comment_id);
+    }
+
+    @Override
+    @Transactional
     public List<Comment> getNumberComment(Integer number, Integer offset) {
         return this.commentDAO.getNumberComment(number, offset);
     }

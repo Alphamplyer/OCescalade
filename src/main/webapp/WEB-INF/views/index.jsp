@@ -39,17 +39,17 @@
         <div class="index-asides">
             <div class="index-asides-container">
                 <p class="index-asides-container-title">Derniers commentaires</p>
-                <c:forEach items="${listComment}" var="listComment">
+                <c:forEach items="${listComment}" var="comment">
                     <hr class="index-asides-separator">
                     <aside class="index-aside">
                         <div class="index-aside-content">
-                            <a class="index-aside-content-title" href=""><c:out value="${listComment.topo_title}" /></a>
-                            <p class="index-aside-content-context">laissé par <a href=""><c:out value="${listComment.user.nickname}"/></a> le <f:formatDate value="${listComment.creation_date}" pattern="dd-MM-yyyy" /></p>
+                            <a class="index-aside-content-title" href="<c:url value="/topo/${comment.topo_id}" />"><c:out value="${comment.topo_title}" /></a>
+                            <p class="index-aside-content-context">laissé par <a href=""><c:out value="${comment.user.nickname}"/></a> le <f:formatDate value="${comment.creation_date}" pattern="dd-MM-yyyy" /></p>
                             <p class="index-aside-content-description">
-                                <c:out value="${listComment.comment_content}" />
+                                <c:out value="${comment.comment_content}" />
                             </p>
                         </div>
-                        <a href="" class="index-aside-learn-more">Read-more</a>
+                        <a href="<c:url value="/topo/${comment.topo_id}#${comment.id}" />" class="index-aside-learn-more">Read-more</a>
                     </aside>
                 </c:forEach>
             </div>

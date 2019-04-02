@@ -31,7 +31,48 @@ public class CommentDAOImpl extends AbstractDAO implements CommentDAO {
         return getNumberComment(0, 0);
     }
 
-    @SuppressWarnings("unchecked")
+    @Override
+    public List<Comment> getTopoComments(Integer topo_id) {
+        StringBuilder querySQL = new StringBuilder("SELECT c.id, c.topo_id, c.user_id, c.comment_content, c.creation_date, c.reply, c.parent_id, c.edited,")
+            .append(" t.topo_title,")
+            .append(" u.id, u.nickname, u.inscription_date, u.permission_level FROM comment c")
+            .append(" INNER JOIN topo t ON c.topo_id = t.id")
+            .append(" INNER JOIN users u ON c.user_id = u.id")
+            .append(" WHERE c.reply = 'FALSE' AND c.topo_id = :id")
+            .append(" ORDER BY c.creation_date DESC");
+
+        NamedParameterJdbcTemplate jdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
+
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("id", topo_id);
+        RowMapper<Comment> rowMapper = new CommentMapper();
+
+        List<Comment> comments = jdbcTemplate.query(querySQL.toString(), params, rowMapper);
+
+        return comments;
+    }
+
+    @Override
+    public List<Comment> getCommentReply(Integer comment_id) {
+        StringBuilder querySQL = new StringBuilder("SELECT c.id, c.topo_id, c.user_id, c.comment_content, c.creation_date, c.reply, c.parent_id, c.edited,")
+            .append(" t.topo_title,")
+            .append(" u.id, u.nickname, u.inscription_date, u.permission_level FROM comment c")
+            .append(" INNER JOIN topo t ON c.topo_id = t.id")
+            .append(" INNER JOIN users u ON c.user_id = u.id")
+            .append(" WHERE c.reply = 'TRUE' AND c.parent_id = :id")
+            .append(" ORDER BY c.creation_date DESC");
+
+        NamedParameterJdbcTemplate jdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
+
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("id", comment_id);
+        RowMapper<Comment> rowMapper = new CommentMapper();
+
+        List<Comment> comments = jdbcTemplate.query(querySQL.toString(), params, rowMapper);
+
+        return comments;
+    }
+
     @Override
     public List<Comment> getNumberComment(Integer number, Integer offset) {
         StringBuilder sql = new StringBuilder("SELECT c.id, c.topo_id, c.user_id, c.comment_content, c.creation_date, c.reply, c.parent_id, c.edited,")
@@ -39,6 +80,7 @@ public class CommentDAOImpl extends AbstractDAO implements CommentDAO {
             .append(" u.id, u.nickname, u.inscription_date, u.permission_level FROM comment c")
             .append(" INNER JOIN topo t ON c.topo_id = t.id")
             .append(" INNER JOIN users u ON c.user_id = u.id")
+            .append(" WHERE c.reply = 'FALSE'")
             .append(" ORDER BY c.creation_date DESC");
         StringBuilder log = new StringBuilder(" Comment(s) loaded successfully !");
 
