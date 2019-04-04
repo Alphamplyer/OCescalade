@@ -227,6 +227,21 @@ footer {
       width: 400px; }
       footer .l-container div p {
         font-size: 15px; } }
+.new_topo_button {
+  position: absolute;
+  right: 50px;
+  top: 520px;
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  width: 175px;
+  text-align: center;
+  border-radius: 20px;
+  background-color: #4f5cce;
+  color: #FFFFFF; }
+  .new_topo_button:hover {
+    background-color: #606fff; }
+
 .section-title {
   margin-top: 120px;
   margin-bottom: 40px; }
@@ -301,14 +316,14 @@ footer {
         color: #FFF; }
 
 .article_site {
-  background-color: #e0e9ff;
+  background-color: #f2eeff;
   margin-bottom: 20px; }
   .article_site h3, .article_site h4 {
     text-transform: uppercase; }
   .article_site_header {
     position: relative;
     padding: 10px;
-    background-color: #999db6;
+    background-color: #909cdf;
     height: 70px; }
     .article_site_header_title, .article_site_header_description, .article_site_header span {
       margin: 0;
@@ -316,15 +331,17 @@ footer {
       color: #ffffff; }
     .article_site_header_title, .article_site_header_description {
       position: absolute;
-      left: 10px; }
+      left: 10px;
+      max-width: 80%; }
     .article_site_header_title {
       top: 12px;
-      color: #282d35; }
+      color: #11161e; }
     .article_site_header_description {
       top: 34px; }
     .article_site_header span {
       position: absolute;
-      right: 10px; }
+      right: 10px;
+      max-width: 20%; }
     .article_site_header_rocktype {
       top: 12px; }
     .article_site_header_elevation {
@@ -333,7 +350,7 @@ footer {
     padding: 10px; }
     .article_site_body .sector {
       position: relative;
-      background-color: #c7c3f1;
+      background-color: #bdc1e3;
       height: 70px;
       color: #282d35; }
       .article_site_body .sector h4, .article_site_body .sector p, .article_site_body .sector .sector_orientation, .article_site_body .sector a {
@@ -414,21 +431,6 @@ footer {
 .comment_section {
   position: relative;
   margin-bottom: 70px; }
-  .comment_section_input textarea {
-    resize: none;
-    font-weight: 400;
-    width: 100%;
-    height: 80px;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #282d35;
-    padding: 10px 15px;
-    border: none;
-    outline: none;
-    color: #AAA;
-    font-size: 16px;
-    border-radius: 10px;
-    margin-bottom: 10px; }
   .comment_section_input input[type="submit"] {
     float: right;
     border: none;
@@ -440,6 +442,63 @@ footer {
     border-radius: 20px; }
     .comment_section_input input[type="submit"]:hover {
       background-color: #8187d7; }
+
+textarea {
+  resize: none;
+  font-weight: 400;
+  width: 100%;
+  height: 80px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #282d35;
+  padding: 10px 15px;
+  border: none;
+  outline: none;
+  color: #AAA;
+  font-size: 16px;
+  border-radius: 10px;
+  margin-bottom: 10px; }
+
+.new_topo_page_form #title {
+  border: none;
+  outline: none;
+  color: #AAA;
+  font-size: 16px;
+  background-color: #282d35;
+  padding: 0px 15px;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 10px;
+  margin-bottom: 10px; }
+.new_topo_page_form #content {
+  height: 250px; }
+.new_topo_page_form label {
+  display: block;
+  color: #282d35;
+  font-weight: 600; }
+.new_topo_page_form #bookable_label {
+  display: inline-block;
+  margin-bottom: 0; }
+.new_topo_page_form #bookable_label, .new_topo_page_form #bookable {
+  float: right; }
+.new_topo_page_form #bookable {
+  position: relative;
+  bottom: -5px;
+  right: 5px; }
+.new_topo_page_form #button {
+  border: none;
+  margin: 0 auto;
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  width: 175px;
+  text-align: center;
+  border-radius: 20px;
+  background-color: #4f5cce;
+  color: #FFFFFF; }
+  .new_topo_page_form #button:hover {
+    background-color: #606fff; }
 
 @media screen and (min-width: 900px) {
   .article-image {

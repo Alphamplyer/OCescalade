@@ -4,12 +4,17 @@ import com.alphamplyer.ocescalade.dao.AbstractDAO;
 import com.alphamplyer.ocescalade.dao.interf.TopoDAO;
 import com.alphamplyer.ocescalade.dao.mapper.TopoMapper;
 import com.alphamplyer.ocescalade.model.Topo;
+import com.alphamplyer.ocescalade.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsertOperations;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -191,5 +196,25 @@ public class TopoDAOImpl extends AbstractDAO implements TopoDAO {
     @Override
     public List<Topo> listBookableSearchedTopo(String[] args, Integer limit, Integer offset) {
         return listSearchedTopo(args, true, limit, offset);
+    }
+
+    @Override
+    public int insertTopo(User user, String title, String description, String content, Boolean bookable) {
+        String sql = "INSERT INTO topo (author_id, topo_title, topo_description, topo_content, creation_date, is_bookable) VALUES (:author_id, :topo_title, :topo_description, :topo_content, 'NOW', :is_bookable);";
+
+        NamedParameterJdbcTemplate jdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
+
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("author_id", user.getId());
+        params.addValue("topo_title", title);
+        params.addValue("topo_description", description);
+        params.addValue("topo_content", content);
+        params.addValue("is_bookable", bookable);
+
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        jdbcTemplate.update(sql, params, keyHolder);
+
+        return (int)keyHolder.getKeys().get("id");
     }
 }

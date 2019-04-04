@@ -1,6 +1,7 @@
 package com.alphamplyer.ocescalade.service.interf;
 
 import com.alphamplyer.ocescalade.model.Topo;
+import com.alphamplyer.ocescalade.model.User;
 
 import java.util.List;
 
@@ -29,4 +30,6 @@ public interface TopoService {
     List<Topo> listSimpleSearchedTopo(String args, Integer limit, Integer offset);
 
     List<Topo> listBookableSearchedTopo(String args, Integer limit, Integer offset);
+
+    int insertTopo(User user, String title, String description, String content, Boolean bookable);
 }

@@ -80,7 +80,7 @@
             </article>
         </c:forEach>
 
-        <h2 class="section-title inner-section-title">Commentaires</h2>
+        <h2 id="com" class="section-title inner-section-title">Commentaires</h2>
 
         <div class="comment_section">
             <c:choose>
@@ -88,7 +88,7 @@
                     <p>Pour laisser un commentaire vous devez être <a href="<c:url value="/signin" />">connecté</a>. Si vous n'êtes pas inscrit, vous pouvez le faire <a href="<c:url value="/signup" />">ici</a></p>
                 </c:when>
                 <c:otherwise>
-                    <form class="comment_section_input" action="/addComment">
+                    <form class="comment_section_input" action="<c:url value="/addComment/${topo.id}" />" method="post">
                         <textarea type="text" name="content" placeholder="Toi aussi laisse ton avis ..."></textarea>
                         <input type="submit">
                     </form>

@@ -36,6 +36,7 @@
             </c:forEach>
         </div>
 
+        <c:if test="${listComment.size() > 0}">
         <div class="index-asides">
             <div class="index-asides-container">
                 <p class="index-asides-container-title">Derniers commentaires</p>
@@ -46,7 +47,18 @@
                             <a class="index-aside-content-title" href="<c:url value="/topo/${comment.topo_id}" />"><c:out value="${comment.topo_title}" /></a>
                             <p class="index-aside-content-context">laissé par <a href=""><c:out value="${comment.user.nickname}"/></a> le <f:formatDate value="${comment.creation_date}" pattern="dd-MM-yyyy" /></p>
                             <p class="index-aside-content-description">
-                                <c:out value="${comment.comment_content}" />
+                                <c:set value="${fn:substring(comment.comment_content, 0, 90)}" var="content" />
+
+                                <c:choose>
+                                    <c:when test="${comment.comment_content.length() > content.length()}">
+                                        <c:out value="${content}..." />
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:out value="${comment.comment_content}" />
+                                    </c:otherwise>
+                                </c:choose>
+
+
                             </p>
                         </div>
                         <a href="<c:url value="/topo/${comment.topo_id}#${comment.id}" />" class="index-aside-learn-more">Read-more</a>
@@ -54,6 +66,7 @@
                 </c:forEach>
             </div>
         </div>
+        </c:if>
     </div>
 </section>
 

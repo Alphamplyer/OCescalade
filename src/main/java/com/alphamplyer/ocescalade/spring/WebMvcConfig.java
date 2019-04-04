@@ -21,7 +21,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         StringHttpMessageConverter stringConverter = new StringHttpMessageConverter();
-        stringConverter.setSupportedMediaTypes(Arrays.asList(new MediaType("text", "plain", UTF8)));
+        stringConverter.setSupportedMediaTypes(Arrays.asList(new MediaType("text", "plain", UTF8), new MediaType("text", "html", UTF8)));
         converters.add(stringConverter);
     }
 

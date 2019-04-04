@@ -2,7 +2,9 @@ package com.alphamplyer.ocescalade.service.impl;
 
 import com.alphamplyer.ocescalade.dao.interf.TopoDAO;
 import com.alphamplyer.ocescalade.model.Topo;
+import com.alphamplyer.ocescalade.model.User;
 import com.alphamplyer.ocescalade.service.interf.TopoService;
+import com.alphamplyer.ocescalade.utils.verification.InsertSecure;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -89,6 +91,17 @@ public class TopoServiceImpl implements TopoService {
     @Transactional
     public List<Topo> listBookableSearchedTopo(String args, Integer limit, Integer offset) {
         return this.topoDAO.listBookableSearchedTopo(splitArgs(args), limit, offset);
+    }
+
+    @Override
+    @Transactional
+    public int insertTopo(User user, String title, String description, String content, Boolean bookable) {
+
+        title = InsertSecure.check(title);
+        description = InsertSecure.check(description);
+        content = InsertSecure.check(content);
+
+        return this.topoDAO.insertTopo(user, title, description, content, bookable);
     }
 
     private String[] splitArgs(String s) {

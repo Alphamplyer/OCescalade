@@ -15,6 +15,11 @@
         <h1 class="header-baseline-title">Topos</h1>
     </div>
 </header>
+
+<c:if test="${sessionScope.user_data != null}">
+    <a class="new_topo_button" href="<c:url value="/newtopo" />">Nouveau Topo</a>
+</c:if>
+
 <section class="section">
     <div class="l-container">
         <h2 class="section-title">Rechercher</h2>

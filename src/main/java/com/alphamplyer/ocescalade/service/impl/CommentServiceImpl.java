@@ -2,7 +2,9 @@ package com.alphamplyer.ocescalade.service.impl;
 
 import com.alphamplyer.ocescalade.dao.interf.CommentDAO;
 import com.alphamplyer.ocescalade.model.Comment;
+import com.alphamplyer.ocescalade.model.User;
 import com.alphamplyer.ocescalade.service.interf.CommentService;
+import com.alphamplyer.ocescalade.utils.verification.InsertSecure;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,5 +47,14 @@ public class CommentServiceImpl implements CommentService {
     @Transactional
     public List<Comment> getNumberComment(Integer number, Integer offset) {
         return this.commentDAO.getNumberComment(number, offset);
+    }
+
+    @Override
+    @Transactional
+    public void insertComment(User user, String content, Integer id) {
+
+        content = InsertSecure.check(content);
+
+        this.commentDAO.insertComment(user, content, id);
     }
 }

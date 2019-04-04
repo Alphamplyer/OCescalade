@@ -4,6 +4,7 @@ import com.alphamplyer.ocescalade.dao.AbstractDAO;
 import com.alphamplyer.ocescalade.dao.interf.CommentDAO;
 import com.alphamplyer.ocescalade.dao.mapper.CommentMapper;
 import com.alphamplyer.ocescalade.model.Comment;
+import com.alphamplyer.ocescalade.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Repository
@@ -116,5 +118,22 @@ public class CommentDAOImpl extends AbstractDAO implements CommentDAO {
         logger.info(log.toString());
 
         return comments;
+    }
+
+    @Override
+    public void insertComment(User user, String content, Integer id) {
+
+        String sql = "INSERT INTO comment (topo_id, user_id, comment_content, creation_date, reply, parent_id) VALUES (:topo_id, :user_id, :comment_content, 'NOW', :reply, :parent_id);";
+
+        NamedParameterJdbcTemplate jdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
+
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("topo_id", id);
+        params.addValue("user_id", user.getId());
+        params.addValue("comment_content", content);
+        params.addValue("reply", false);
+        params.addValue("parent_id", null);
+
+        jdbcTemplate.update(sql, params);
     }
 }
