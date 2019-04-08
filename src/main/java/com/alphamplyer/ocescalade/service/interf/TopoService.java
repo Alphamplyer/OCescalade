@@ -3,6 +3,7 @@ package com.alphamplyer.ocescalade.service.interf;
 import com.alphamplyer.ocescalade.model.Topo;
 import com.alphamplyer.ocescalade.model.User;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public interface TopoService {
@@ -32,4 +33,6 @@ public interface TopoService {
     List<Topo> listBookableSearchedTopo(String args, Integer limit, Integer offset);
 
     int insertTopo(User user, String title, String description, String content, Boolean bookable);
+
+    void reserve(User user, Integer topo_id, boolean is_bookable, Timestamp begin_date, Timestamp end_date);
 }

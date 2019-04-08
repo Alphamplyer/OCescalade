@@ -27,7 +27,7 @@ public class DateValidation implements Validation {
             java.util.Date date = df.parse(str_date);
             return new java.sql.Date(date.getTime());
         } catch (ParseException e) {
-            System.out.println("Exception :" + e);
+            System.out.println("Failed to convert date with the format " + DATE_FORMAT + " : " + str_date);
             return null;
         }
     }

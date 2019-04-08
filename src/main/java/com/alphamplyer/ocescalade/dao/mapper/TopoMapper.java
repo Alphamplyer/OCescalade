@@ -21,6 +21,11 @@ public class TopoMapper implements RowMapper<Topo> {
         topo.setTopo_like(rs.getInt("topo_like"));
         topo.setTopo_vues(rs.getInt("topo_vues"));
         topo.setFindedTopo(rs.getInt("full_count"));
+
+        topo.setIs_bookable(rs.getBoolean("is_bookable"));
+        topo.setBegin_date(rs.getTimestamp("begin_date"));
+        topo.setEnd_date(rs.getTimestamp("end_date"));
+        topo.setOrganizer_id(rs.getInt("organizer_id"));
         return topo;
     }
 }

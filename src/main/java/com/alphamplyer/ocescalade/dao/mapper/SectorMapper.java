@@ -15,7 +15,6 @@ public class SectorMapper implements RowMapper<Sector> {
 
         sector.setSite_id(rs.getInt("site_id"));
         sector.setOrientation(rs.getString("orientation"));
-        sector.setDifficulty(rs.getString("difficulty"));
         sector.setSector_name(rs.getString("sector_name"));
         sector.setSector_description(rs.getString("sector_description"));
 

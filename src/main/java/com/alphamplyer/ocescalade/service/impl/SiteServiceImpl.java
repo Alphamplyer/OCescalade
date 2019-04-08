@@ -3,7 +3,9 @@ package com.alphamplyer.ocescalade.service.impl;
 import com.alphamplyer.ocescalade.dao.interf.SectorDAO;
 import com.alphamplyer.ocescalade.dao.interf.SiteDAO;
 import com.alphamplyer.ocescalade.model.Site;
+import com.alphamplyer.ocescalade.model.User;
 import com.alphamplyer.ocescalade.service.interf.SiteService;
+import com.alphamplyer.ocescalade.utils.verification.InsertSecure;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,5 +43,15 @@ public class SiteServiceImpl implements SiteService {
         }
 
         return sites;
+    }
+
+    @Override
+    @Transactional
+    public void insertSite(User user, Integer id, String name, String description, Double elevation, String rock_type) {
+
+        name = InsertSecure.check(name);
+        description = InsertSecure.check(description);
+
+        this.siteDAO.insertSite(user, id, name, description, elevation, rock_type);
     }
 }

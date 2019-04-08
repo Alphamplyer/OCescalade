@@ -17,6 +17,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Repository
@@ -216,5 +217,22 @@ public class TopoDAOImpl extends AbstractDAO implements TopoDAO {
         jdbcTemplate.update(sql, params, keyHolder);
 
         return (int)keyHolder.getKeys().get("id");
+    }
+
+    @Override
+    public void reserve(User user, Integer topo_id, boolean is_bookable, Timestamp begin_date, Timestamp end_date) {
+        String sql = "UPDATE topo SET is_bookable = :is_bookable, begin_date = :begin_date, end_date = :end_date, organizer_id = :organizer_id WHERE id = :topo_id";
+
+        NamedParameterJdbcTemplate jdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
+
+        MapSqlParameterSource params = new MapSqlParameterSource();
+
+        params.addValue("is_bookable", true);
+        params.addValue("begin_date", begin_date);
+        params.addValue("end_date", end_date);
+        params.addValue("organizer_id", user.getId());
+        params.addValue("topo_id", topo_id);
+
+        jdbcTemplate.update(sql, params);
     }
 }

@@ -7,4 +7,6 @@ public interface UserDAO {
     User getUserByNickname(String name);
 
     void registerUser(User user);
+
+    User getUser(Integer id);
 }

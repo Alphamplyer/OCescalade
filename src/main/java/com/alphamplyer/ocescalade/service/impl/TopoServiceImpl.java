@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -102,6 +103,12 @@ public class TopoServiceImpl implements TopoService {
         content = InsertSecure.check(content);
 
         return this.topoDAO.insertTopo(user, title, description, content, bookable);
+    }
+
+    @Override
+    @Transactional
+    public void reserve(User user, Integer topo_id, boolean is_bookable, Timestamp begin_date, Timestamp end_date) {
+        this.topoDAO.reserve(user, topo_id, is_bookable, begin_date, end_date);
     }
 
     private String[] splitArgs(String s) {

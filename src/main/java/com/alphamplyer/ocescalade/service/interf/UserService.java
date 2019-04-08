@@ -8,4 +8,6 @@ public interface UserService {
     void register(User user);
 
     User checkPassword(Login login);
+
+    User getUser(Integer id);
 }

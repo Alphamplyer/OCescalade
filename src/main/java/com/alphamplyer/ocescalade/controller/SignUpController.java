@@ -6,6 +6,8 @@ import com.alphamplyer.ocescalade.utils.validation.DateValidation;
 import com.alphamplyer.ocescalade.utils.validation.EmailValidation;
 import com.alphamplyer.ocescalade.utils.validation.NameValidation;
 import com.alphamplyer.ocescalade.utils.validation.NicknameValidation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -16,9 +18,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.sql.Date;
+import java.text.ParseException;
 
 @Controller
 public class SignUpController {
+
+    private static final Logger logger = LoggerFactory.getLogger(SignUpController.class);
 
     private UserService userService;
 
@@ -79,7 +84,9 @@ public class SignUpController {
         if (Passwd != null && ComfirmPasswd != null && Passwd.length() > 0)
             valid_passwd = Passwd.equals(ComfirmPasswd);
 
+
         Date date = DateValidation.convertStringToTimestamp(birthdate);
+
 
         if (date == null) {
             valid_birthdate = false;

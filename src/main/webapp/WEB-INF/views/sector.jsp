@@ -22,14 +22,18 @@
 
         <p><c:out value="${sector.sector_description}"/></p>
 
-        <h2 class="section-title inner-section-title">Description</h2>
+        <h2 class="section-title inner-section-title">Voies</h2>
+
+        <c:if test="${sessionScope.user_data != null && sessionScope.user_data.id == author_id}">
+            <a class="button button-right button_align_title" href="<c:url value="/newway/${topo_id}/${site_id}/${sector.id}" />">Nouvelle Voie</a>
+        </c:if>
 
         <c:forEach items="${ways}" var="way">
             <div class="sector_way">
                 <h3 class="title"><c:out value="${way.way_name}" /></h3>
                 <p class="description"><c:out value="${way.way_description}" /></p>
-                <span class="height"><c:out value="${way.height}"</span>
-                <span class="quotation"><c:out value="${way.quotation}" /></span>
+                <span class="height"><b>Hauteur : </b><c:out value="${way.height}" /> m</span>
+                <span class="quotation"><b>Notation : </b><c:out value="${way.quotation}" /></span>
             </div>
         </c:forEach>
     </div>

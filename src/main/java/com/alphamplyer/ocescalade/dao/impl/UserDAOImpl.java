@@ -24,7 +24,6 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
         RowMapper<User> rowMapper = new UserMapper();
 
-
         return jdbcTemplate.queryForObject(sql, rowMapper);
     }
 
@@ -45,5 +44,15 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
         params.addValue("mail", user.getMail());
 
         jdbcTemplate.update(sql, params);
+    }
+
+    @Override
+    public User getUser(Integer id) {
+        String sql = "SELECT * FROM users WHERE id = '" + id + "'";
+
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
+        RowMapper<User> rowMapper = new UserMapper();
+
+        return jdbcTemplate.queryForObject(sql, rowMapper);
     }
 }

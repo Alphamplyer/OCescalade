@@ -24,14 +24,14 @@ public class WayDAOImpl extends AbstractDAO implements WayDAO {
         params.addValue("id", id);
         RowMapper<Way> rowMapper = new WayMapper();
 
-        Way site = jdbcTemplate.queryForObject(querySQL, params, rowMapper);
+        Way way = jdbcTemplate.queryForObject(querySQL, params, rowMapper);
 
-        return site;
+        return way;
     }
 
     @Override
     public List<Way> getSectorWay(Integer sector_id) {
-        String querySQL = "SELECT * FROM way WHERE id = :id";
+        String querySQL = "SELECT * FROM way WHERE sector_id = :id";
 
         NamedParameterJdbcTemplate jdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
 
@@ -39,8 +39,24 @@ public class WayDAOImpl extends AbstractDAO implements WayDAO {
         params.addValue("id", sector_id);
         RowMapper<Way> rowMapper = new WayMapper();
 
-        List<Way> site = jdbcTemplate.query(querySQL, params, rowMapper);
+        List<Way> ways = jdbcTemplate.query(querySQL, params, rowMapper);
 
-        return site;
+        return ways;
+    }
+
+    @Override
+    public void insert(Integer sector_id, String name, String description, Double height, String quotation) {
+        String sql = "INSERT INTO way (sector_id, height, quotation, way_name, way_description) VALUES (:sector_id, :height, :quotation, :way_name, :way_description)";
+
+        NamedParameterJdbcTemplate jdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
+
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("sector_id", sector_id);
+        params.addValue("height", height);
+        params.addValue("quotation", quotation);
+        params.addValue("way_name", name);
+        params.addValue("way_description", description);
+
+        jdbcTemplate.update(sql, params);
     }
 }

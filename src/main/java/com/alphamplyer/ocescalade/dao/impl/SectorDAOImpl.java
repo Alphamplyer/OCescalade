@@ -4,6 +4,7 @@ import com.alphamplyer.ocescalade.dao.AbstractDAO;
 import com.alphamplyer.ocescalade.dao.interf.SectorDAO;
 import com.alphamplyer.ocescalade.dao.mapper.SectorMapper;
 import com.alphamplyer.ocescalade.model.Sector;
+import com.alphamplyer.ocescalade.model.User;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -42,5 +43,21 @@ public class SectorDAOImpl extends AbstractDAO implements SectorDAO {
         List<Sector> site = jdbcTemplate.query(querySQL, params, rowMapper);
 
         return site;
+    }
+
+    @Override
+    public void insertSector(User user, Integer site_id, String name, String description, String orientation) {
+        String sql = "INSERT INTO sector (site_id, orientation, sector_name, sector_description) " +
+            " VALUES (:site_id, :orientation, :sector_name, :sector_description)";
+
+        NamedParameterJdbcTemplate jdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
+
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("site_id", site_id);
+        params.addValue("orientation", orientation);
+        params.addValue("sector_name", name);
+        params.addValue("sector_description", description);
+
+        jdbcTemplate.update(sql, params);
     }
 }

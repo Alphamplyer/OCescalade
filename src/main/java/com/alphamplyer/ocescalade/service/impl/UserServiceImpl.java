@@ -39,4 +39,10 @@ public class UserServiceImpl implements UserService {
             return null;
         }
     }
+
+    @Override
+    @Transactional
+    public User getUser(Integer id) {
+        return this.userDAO.getUser(id);
+    }
 }
