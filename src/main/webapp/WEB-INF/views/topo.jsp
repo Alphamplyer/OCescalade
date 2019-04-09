@@ -75,40 +75,36 @@
             <c:out value="${topo.topo_content}"/>
         </p>
 
-        <c:if test="${sites.size() > 0 || (sessionScope.user_data != null && sessionScope.user_data.id == topo.author_id)}">
-            <c:choose>
-                <c:when test="${sites.size() > 0}">
-                    <h2 class="section-title inner-section-title">Sites</h2>
-                    <a class="button button-right button_align_title" href="<c:url value="/newsite/${topo.id}" />">Nouveau Site</a>
-                    <c:forEach items="${sites}" var="site">
-                        <article class="article_site">
-                            <div class="article_site_header">
-                                <h3 class="article_site_header_title"><c:out value="${site.site_name}" /></h3>
-                                <p class="article_site_header_description"><c:out value="${site.site_description}" /></p>
-                                <span class="article_site_header_rocktype">Type de roche : <c:out value="${site.rock_type}" /></span>
-                                <span class="article_site_header_elevation" >Altitude du site : <c:out value="${site.site_elevation}" /></span>
+        <h2 class="section-title inner-section-title">Sites</h2>
+
+        <c:if test="${sessionScope.user_data != null && sessionScope.user_data.id == topo.author_id}">
+            <a class="button button-right button_align_title" href="<c:url value="/newsite/${topo.id}" />">Nouveau Site</a>
+        </c:if>
+
+        <c:if test="${sites.size() > 0}">
+            <c:forEach items="${sites}" var="site">
+                <article class="article_site">
+                    <div class="article_site_header">
+                        <h3 class="article_site_header_title"><c:out value="${site.site_name}" /></h3>
+                        <p class="article_site_header_description"><c:out value="${site.site_description}" /></p>
+                        <span class="article_site_header_rocktype">Type de roche : <c:out value="${site.rock_type}" /></span>
+                        <span class="article_site_header_elevation" >Altitude du site : <c:out value="${site.site_elevation}" /></span>
+                    </div>
+                    <div class="article_site_body">
+                        <c:forEach items="${site.sectors}" var="sector">
+                            <div class="sector">
+                                <h4 class="sector_name"><c:out value="${sector.sector_name}" /></h4>
+                                <p class="sector_description"><c:out value="${sector.sector_description}" /></p>
+                                <span class="sector_orientation">Orientation : <c:out value="${sector.orientation}" /></span>
+                                <a href="<c:url value="/topo/${topo.id}/${site.id}/${sector.id}" />" class="sector-learn-more"><span>></span></a>
                             </div>
-                            <div class="article_site_body">
-                                <c:forEach items="${site.sectors}" var="sector">
-                                    <div class="sector">
-                                        <h4 class="sector_name"><c:out value="${sector.sector_name}" /></h4>
-                                        <p class="sector_description"><c:out value="${sector.sector_description}" /></p>
-                                        <span class="sector_orientation">Orientation : <c:out value="${sector.orientation}" /></span>
-                                        <a href="<c:url value="/topo/${topo.id}/${site.id}/${sector.id}" />" class="sector-learn-more"><span>></span></a>
-                                    </div>
-                                </c:forEach>
-                                <c:if test="${sessionScope.user_data != null && sessionScope.user_data.id == topo.author_id}">
-                                    <a class="button" href="<c:url value="/newsector/${topo.id}/${site.id}" />">Nouveau Secteur</a>
-                                </c:if>
-                            </div>
-                        </article>
-                    </c:forEach>
-                </c:when>
-                <c:otherwise>
-                    <h2 class="section-title inner-section-title">Sites</h2>
-                    <a class="button button-right button_align_title" href="<c:url value="/newsite/${topo.id}" />">Nouveau Site</a>
-                </c:otherwise>
-            </c:choose>
+                        </c:forEach>
+                        <c:if test="${sessionScope.user_data != null && sessionScope.user_data.id == topo.author_id}">
+                            <a class="button" href="<c:url value="/newsector/${topo.id}/${site.id}" />">Nouveau Secteur</a>
+                        </c:if>
+                    </div>
+                </article>
+            </c:forEach>
         </c:if>
 
         <h2 id="com" class="section-title inner-section-title">Commentaires</h2>

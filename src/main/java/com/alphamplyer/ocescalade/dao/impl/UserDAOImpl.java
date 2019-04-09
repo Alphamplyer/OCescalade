@@ -6,6 +6,7 @@ import com.alphamplyer.ocescalade.dao.mapper.UserMapper;
 import com.alphamplyer.ocescalade.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -24,7 +25,13 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
         RowMapper<User> rowMapper = new UserMapper();
 
-        return jdbcTemplate.queryForObject(sql, rowMapper);
+        try {
+            return jdbcTemplate.queryForObject(sql, rowMapper);
+        } catch (EmptyResultDataAccessException e) {
+            logger.debug("No user founded !");
+            return null;
+        }
+
     }
 
     @Override

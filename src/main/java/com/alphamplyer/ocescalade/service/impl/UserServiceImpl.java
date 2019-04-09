@@ -30,14 +30,16 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public User checkPassword(Login login) {
         User user = this.userDAO.getUserByNickname(login.getUsername());
+
+        if (user == null)
+            return null;
+
         String salt = user.getSalt();
 
-        if (Password.verifyUserPassword(login.getPassword(), user.getPassword(), salt)) {
+        if (Password.verifyUserPassword(login.getPassword(), user.getPassword(), salt))
             return user;
-        }
-        else {
+        else
             return null;
-        }
     }
 
     @Override

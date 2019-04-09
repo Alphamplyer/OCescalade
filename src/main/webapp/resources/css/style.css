@@ -352,25 +352,18 @@ footer {
   .article_site_header {
     position: relative;
     padding: 10px;
-    background-color: #909cdf;
-    height: 70px; }
+    background-color: #909cdf; }
     .article_site_header_title, .article_site_header_description, .article_site_header span {
       margin: 0;
       padding: 0;
       color: #ffffff; }
     .article_site_header_title, .article_site_header_description {
-      position: absolute;
-      left: 10px;
       max-width: 80%; }
-    .article_site_header_title {
-      top: 12px;
-      color: #11161e; }
-    .article_site_header_description {
-      top: 34px; }
     .article_site_header span {
       position: absolute;
       right: 10px;
-      max-width: 20%; }
+      max-width: 18%;
+      overflow: hidden; }
     .article_site_header_rocktype {
       top: 12px; }
     .article_site_header_elevation {
@@ -382,15 +375,15 @@ footer {
       position: relative;
       background-color: #bdc1e3;
       height: 70px;
+      overflow: hidden;
       color: #282d35; }
-      .article_site_body .sector h4, .article_site_body .sector p, .article_site_body .sector .sector_orientation, .article_site_body .sector a {
+      .article_site_body .sector .sector_orientation, .article_site_body .sector a {
         position: absolute; }
       .article_site_body .sector h4, .article_site_body .sector p {
-        left: 10px; }
+        width: 80%;
+        margin: 0 0 0 10px; }
       .article_site_body .sector h4 {
-        top: 12px; }
-      .article_site_body .sector p {
-        top: 32px; }
+        margin-bottom: 8px; }
       .article_site_body .sector .sector_orientation {
         top: 21px;
         right: 70px; }
@@ -398,16 +391,13 @@ footer {
         right: 0;
         top: 0;
         width: 50px;
-        height: 70px;
+        height: 100%;
         text-align: center;
         line-height: 70px;
         background-color: #7781ce;
         color: #FFFFFF; }
         .article_site_body .sector a:hover {
           background-color: #8694ce; }
-      .article_site_body .sector h4 {
-        top: 12px;
-        margin: 0; }
 
 .topo-articles {
   width: 100%;
@@ -472,22 +462,6 @@ footer {
     border-radius: 20px; }
     .comment_section_input input[type="submit"]:hover {
       background-color: #8187d7; }
-
-textarea {
-  resize: none;
-  font-weight: 400;
-  width: 100%;
-  height: 80px;
-  margin-left: auto;
-  margin-right: auto;
-  background-color: #282d35;
-  padding: 10px 15px;
-  border: none;
-  outline: none;
-  color: #AAA;
-  font-size: 16px;
-  border-radius: 10px;
-  margin-bottom: 10px; }
 
 .new_topo_page_form #title {
   border: none;
@@ -778,6 +752,23 @@ textarea {
   line-height: 40px;
   border-radius: 10px;
   margin-bottom: 10px; }
+
+textarea {
+  resize: none;
+  font-weight: 400;
+  width: 100%;
+  height: 80px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #282d35;
+  padding: 10px 15px;
+  border: none;
+  outline: none;
+  color: #AAA;
+  font-size: 16px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  white-space: pre-wrap; }
 
 .inline_link {
   color: #12141c;
