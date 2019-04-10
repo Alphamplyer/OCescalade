@@ -31,3 +31,7 @@ Cette manipulation a été décrite à partir d'**IntelliJ IDEA Ultimate 2019.1*
 4. Configurer le serveur Tomcat. Pour celà, ajouter une nouvelle configuration "Tomcat Local". Dans l'onglet de Déploiement ("Deployment"), ajouter le WAR nommé **OCEscalade:war**. Changer ensuite les port à votre convenance et confirmer la création.
 5. Dans l'onglet **Database** à droite, configurer une nouvelle **DataSource PostgreSQL** avec comme utilisateur "ocescalade" et le mot de passe inscrit dans le fichier de configuration ("src/main/resources/db.properties").
 6. Il ne vous reste plus qu'à déployer l'application.
+
+### Autre
+
+Si vous n'avez pas **IntelliJ** ou que vous chercher un exemple avec des images, rendez-vous sur [ce site](https://www.baeldung.com/tomcat-deploy-war).
