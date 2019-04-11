@@ -27,8 +27,8 @@ Cette manipulation a été décrite à partir d'**IntelliJ IDEA Ultimate 2019.1*
 
 1. Télécharger ou Cloner ce projet
 2. Ouvrez le à l'aide d'IntelliJ
-3. Créer la base de données à partir du dump situé dans le dosier SQL Scripts du projet. Si le dump ne fonctionne pas, il faudra peut-être créer l'utilisateur nommée : "ocescalade" ; auquel vous donnerez les droits nécésaire à l'utilisation de la BdD. Le mot de passe importe peu, tant qu'il est changé dans le fichier de configuration de la base de données ("src/main/resources/db.properties"). Vous pouvez aussi changer l'url d'accès à la base de données.
-4. Configurer le serveur Tomcat. Pour celà, ajouter une nouvelle configuration "Tomcat Local". Dans l'onglet de Déploiement ("Deployment"), ajouter le WAR nommé **OCEscalade:war**. Changer ensuite les port à votre convenance et confirmer la création.
+3. Créer la base de données et les table ainsi que leur contenue à partir des fichiers situés dans le dossier "*script sql*" du projet (à executer sur **PostgreSQL** dans l'odre). Si le dump ne fonctionne pas, il faudra peut-être créer l'utilisateur nommée : "ocescalade" ; auquel vous donnerez les droits nécésaire à l'utilisation de la BdD. Le mot de passe importe peu, tant qu'il est changé dans le fichier de configuration de la base de données ("src/main/resources/db.properties"). Vous pouvez aussi changer l'url d'accès à la base de données.
+4. Configurer le serveur Tomcat. Pour celà, ajouter une nouvelle configuration "Tomcat Local". Dans l'onglet de Déploiement ("Deployment"), ajouter le WAR nommé **OCEscalade:war**. Changer ensuite les ports à votre convenance et confirmer la création.
 5. Dans l'onglet **Database** à droite, configurer une nouvelle **DataSource PostgreSQL** avec comme utilisateur "ocescalade" et le mot de passe inscrit dans le fichier de configuration ("src/main/resources/db.properties").
 6. Il ne vous reste plus qu'à déployer l'application.
 
