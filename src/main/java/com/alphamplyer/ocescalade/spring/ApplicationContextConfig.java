@@ -86,9 +86,4 @@ public class ApplicationContextConfig {
     public WayService getWayService() {
         return new WayServiceImpl();
     }
-
-    @Bean(name = "imageService")
-    public ImageService getImageService() {
-        return new ImageServiceImpl();
-    }
 }

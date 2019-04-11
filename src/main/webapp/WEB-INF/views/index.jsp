@@ -27,8 +27,8 @@
                         <h3 class="article-content-title"><a href=""><c:out value="${listTopo.topo_title}" /></a></h3>
                         <p class="article-content-description"><c:out value="${listTopo.topo_description}" /></p>
                         <div class="article-content-like">
-                            <span><c:out value="${listTopo.topo_like}" /></span><i class="far fa-eye"></i>
-                            <span><c:out value="${listTopo.topo_vues}" /></span><i class="far fa-heart"></i>
+                            <span><c:out value="${listTopo.topo_vues}" /></span><i class="far fa-eye"></i>
+                            <span><c:out value="${listTopo.topo_like}" /></span><i class="far fa-heart"></i>
                         </div>
                     </div>
                     <a href="<c:url value="/topo/${listTopo.id}" />" class="article-learn-more"><span>></span></a>
