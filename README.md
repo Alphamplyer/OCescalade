@@ -35,3 +35,7 @@ Cette manipulation a été décrite à partir d'**IntelliJ IDEA Ultimate 2019.1*
 ### Autre
 
 Si vous n'avez pas **IntelliJ** ou que vous cherchez un exemple plus détaillé, rendez-vous sur [ce site](https://www.baeldung.com/tomcat-deploy-war).
+
+## Quelques images
+
+quelques images du projet [ici](https://imgur.com/a/CimXHd4).
